@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Upload a .zip-File containing Opencast-Workflow-XML-Files</h2>
+<mat-dialog-content>
+  <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDropUpload (fileDropped)="uploadFile($event)">
+    <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+  </div>
+  <div  class="files-list" *ngFor="let file of files;let i= index">
+    <p> {{ file.name }} </p>
+    <button class="delete-file" (click)="deleteAttachment(i)">
+      <img src="../../assets/Recycle_Bin_Full.png">
+    </button>
+  </div>
+</mat-dialog-content>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="submitUpload()" cdkFocusInitial>Upload</button>
+
+  <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" diameter="20"></mat-progress-spinner>
+</div>

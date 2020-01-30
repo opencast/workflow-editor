@@ -1,0 +1,9 @@
+mat-toolbar {
+  --default-height: 50px;
+}
+
+mat-toolbar[color="primary"] {
+  top: 0;
+  position: fixed;
+  height: var(--default-height);
+}
