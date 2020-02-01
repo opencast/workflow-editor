@@ -10,12 +10,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UploadWorkflowsDialogComponent } from './upload-workflows-dialog/upload-workflows-dialog.component';
 import { DragDropUploadDirective } from './drag-drop-upload.directive';
+import { WorkflowListComponent } from './workflow-list/workflow-list.component';
+import { SaveWorkflowsDialogComponent } from './save-workflows-dialog/save-workflows-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UploadWorkflowsDialogComponent,
-    DragDropUploadDirective
+    DragDropUploadDirective,
+    WorkflowListComponent,
+    SaveWorkflowsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +33,6 @@ import { DragDropUploadDirective } from './drag-drop-upload.directive';
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [UploadWorkflowsDialogComponent]
+  entryComponents: [UploadWorkflowsDialogComponent, SaveWorkflowsDialogComponent]
 })
 export class AppModule { }

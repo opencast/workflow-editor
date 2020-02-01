@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Save workflows as .zip-File</h2>
+<mat-dialog-content>
+  <div  class="files-list" *ngFor="let workflow of workflows; let i= index">
+    <p> {{ workflow.id }}.xml </p>
+  </div>
+</mat-dialog-content>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="submitSave()" cdkFocusInitial>Save</button>
+
+  <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" diameter="20"></mat-progress-spinner>
+</div>

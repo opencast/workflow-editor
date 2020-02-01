@@ -1,66 +1,12 @@
 <!-- Toolbar -->
-    <mat-toolbar class="toolbar mat-elevation-z4" color="primary">
-      <span>Opencast Workflow Editor</span>
-      <button mat-stroked-button (click)="openDialog()">Upload</button>
-    </mat-toolbar>
+<mat-toolbar class="toolbar mat-elevation-z4" color="primary">
+  <span>Opencast Workflow Editor</span>
+  <button mat-stroked-button (click)="openUploadDialog()">Upload</button>
+  <button mat-stroked-button (click)="openSaveDialog()">Save</button>
+  <button mat-stroked-button>Select</button>
+  <button mat-stroked-button>New</button>
+</mat-toolbar>
 
-    <main class="content" role="main">
-
-      <!-- Highlight Card -->
-      <div class="card highlight-card card-small">
-
-        <span>{{ title }} app is running!</span>
-
-      </div>
-
-      <!-- Resources -->
-      <h2>Resources</h2>
-      <p>Here are some links to help you get started:</p>
-
-      <div class="card-container">
-        <a class="card" target="_blank" rel="noopener" href="https://angular.io/tutorial">
-          <span>Learn Angular</span>
-        </a>
-
-        <a class="card" target="_blank" rel="noopener" href="https://angular.io/cli">
-
-          <span>CLI Documentation</span>
-
-        </a>
-
-        <a class="card" target="_blank" rel="noopener" href="https://blog.angular.io/">
-
-          <span>Angular Blog</span>
-
-        </a>
-
-      </div>
-
-      <!-- Next Steps -->
-      <h2>Next Steps</h2>
-      <p>What do you want to do next with your app?</p>
-
-      <input type="hidden" #selection>
-
-      <div class="card-container">
-        <div class="card card-small" (click)="selection.value = 'component'" tabindex="0">
-          <span>New Component</span>
-        </div>
-
-        <div class="card card-small" (click)="selection.value = 'material'" tabindex="0">
-          <span>Angular Material</span>
-        </div>
-
-        <div class="card card-small" (click)="selection.value = 'dependency'" tabindex="0">
-          <span>Add Dependency</span>
-        </div>
-
-        <div class="card card-small" (click)="selection.value = 'test'" tabindex="0">
-          <span>Run and Watch Tests</span>
-        </div>
-
-        <div class="card card-small" (click)="selection.value = 'build'" tabindex="0">
-          <span>Build for Production</span>
-        </div>
-      </div>
-    </main>
+<main class="content" role="main">
+  <app-workflow-list></app-workflow-list>
+</main>

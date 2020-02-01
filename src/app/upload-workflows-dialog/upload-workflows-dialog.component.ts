@@ -1,4 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { WorkflowService } from '../services/workflow-service/workflow.service';
+import {MatDialog} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-upload-workflows-dialog',
@@ -6,9 +9,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./upload-workflows-dialog.component.css']
 })
 export class UploadWorkflowsDialogComponent {
-  @Input() isLoading = false;
-  @Output() extractFiles = new EventEmitter();
+  isLoading = false;
+  uploadDisabled = false;
   files: any = [];
+
+  constructor(private dialog: MatDialog,
+              public dialogRef: MatDialogRef<UploadWorkflowsDialogComponent>,
+              private workflowService: WorkflowService) {}
 
   uploadFile(event) {
     for (const element of event) {
@@ -25,7 +32,34 @@ export class UploadWorkflowsDialogComponent {
   }
 
   submitUpload() {
-    this.extractFiles.emit(this.files);
-    // console.log(this.files);
+    const uploadPromises: Promise<void>[] = [];
+
+    this.isLoading = true;
+    this.dialogRef.disableClose = true;
+
+    this.files.forEach((fileElement) => {
+      console.log(fileElement.type);
+      if (fileElement.type === 'application/zip') {
+        uploadPromises.push(this.workflowService.unzipFiles(fileElement));
+      } else if (fileElement.type === 'text/xml') {
+        uploadPromises.push(this.workflowService.readUploadedXmlFileAsText(fileElement));
+      } else {
+        // todo: Warning see uploadFile
+      }
+    });
+
+    Promise.all(uploadPromises)
+      .then(() => {
+        this.dialogRef.close();
+      })
+      .catch((e) => {
+        console.log(e);
+        // todo: Promise Exception
+      })
+      .finally(() => {
+        this.uploadDisabled = true;
+        this.isLoading = false;
+        this.dialogRef.disableClose = false;
+      });
   }
 }
