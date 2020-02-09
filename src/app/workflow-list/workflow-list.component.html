@@ -1,1 +1,14 @@
-<p>workflow-list works!</p>
+<mat-tab-group id="tab-group">
+    <mat-tab *ngFor="let workflow of workflows" label="{{workflow.id}}">
+        <mat-sidenav-container>
+            <mat-sidenav #sidenav mode="side" class="default-operation-list" fixedInViewport="true" fixedTopGap="113">
+              <button mat-stroked-button (click)="sidenav.toggle()">Close</button>
+              <app-default-operation-list></app-default-operation-list>
+            </mat-sidenav>
+          <mat-sidenav-content class="workflow-item">
+            <button mat-stroked-button (click)="sidenav.toggle()">Operations</button>
+            <app-workflow-item [workflow]="workflow"></app-workflow-item>
+          </mat-sidenav-content>
+        </mat-sidenav-container>
+    </mat-tab>
+</mat-tab-group>

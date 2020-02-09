@@ -1,13 +1,19 @@
 <h2 mat-dialog-title>Save workflows as .zip-File</h2>
 <mat-dialog-content>
-  <div  class="files-list" *ngFor="let workflow of workflows; let i= index">
-    <p> {{ workflow.id }}.xml </p>
-  </div>
-</mat-dialog-content>
+  <mat-selection-list #workflowsSelected>
+    <mat-list-option *ngFor="let workflow of workflows"  [selected]="workflow.save">
+      {{workflow.id}}.xml
+    </mat-list-option>
+  </mat-selection-list>
 
-<div mat-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <p>
+    Workflows selected: {{workflowsSelected.selectedOptions.selected.length}}
+  </p>
   <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="submitSave2()">Save2</button>
   <button mat-button (click)="submitSave()" cdkFocusInitial>Save</button>
 
   <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" diameter="20"></mat-progress-spinner>
-</div>
+</mat-dialog-actions>

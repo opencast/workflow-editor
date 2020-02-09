@@ -12,6 +12,13 @@ import { UploadWorkflowsDialogComponent } from './upload-workflows-dialog/upload
 import { DragDropUploadDirective } from './drag-drop-upload.directive';
 import { WorkflowListComponent } from './workflow-list/workflow-list.component';
 import { SaveWorkflowsDialogComponent } from './save-workflows-dialog/save-workflows-dialog.component';
+import {MatBadgeModule, MatButtonToggleModule, MatCardModule, MatListModule, MatSlideToggleModule, MatTabsModule} from '@angular/material';
+import { WorkflowItemComponent } from './workflow-item/workflow-item.component';
+import { OperationItemComponent } from './operation-item/operation-item.component';
+import {SortablejsModule} from 'ngx-sortablejs';
+import { DefaultOperationListComponent } from './default-operation-list/default-operation-list.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,18 +26,37 @@ import { SaveWorkflowsDialogComponent } from './save-workflows-dialog/save-workf
     UploadWorkflowsDialogComponent,
     DragDropUploadDirective,
     WorkflowListComponent,
-    SaveWorkflowsDialogComponent
+    SaveWorkflowsDialogComponent,
+    WorkflowItemComponent,
+    OperationItemComponent,
+    DefaultOperationListComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatDialogModule,
+    MatTabsModule,
+    MatCardModule,
+    FormsModule,
+    MatBadgeModule,
+    MatListModule,
     MatSidenavModule,
+    MatButtonToggleModule,
+    FlexLayoutModule,
+    MatSlideToggleModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    SortablejsModule.forRoot({
+      animation: 150,
+      group: {
+        name: 'shared'
+      },
+      fallbackOnBody: true,
+      swapThreshold: 0.65
+    })
   ],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [UploadWorkflowsDialogComponent, SaveWorkflowsDialogComponent]

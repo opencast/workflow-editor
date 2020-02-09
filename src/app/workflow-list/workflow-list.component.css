@@ -1,0 +1,16 @@
+.default-operation-list {
+  border-right: 1px solid black;
+  padding: 10px;
+}
+.default-operation-list .mat-card {
+  width: 100%;
+}
+.workflow-item {
+  padding: 10px;
+}
+#tab-group{
+  height: 100%;
+}
+#tab-group mat-tab-body {
+  flex-grow: 1;
+}

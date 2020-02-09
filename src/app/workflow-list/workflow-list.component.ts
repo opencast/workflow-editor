@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Workflow} from '../models/workflow';
+import {WorkflowService} from '../services/workflow-service/workflow.service';
 
 @Component({
   selector: 'app-workflow-list',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WorkflowListComponent implements OnInit {
 
-  constructor() { }
+  workflows: Workflow[];
+
+  constructor(private workflowService: WorkflowService) {
+    this.workflows = workflowService.workflows;
+  }
 
   ngOnInit() {
   }
-
 }

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { UploadWorkflowsDialogComponent } from './upload-workflows-dialog/upload-workflows-dialog.component';
 import {WorkflowService} from './services/workflow-service/workflow.service';
 import {SaveWorkflowsDialogComponent} from './save-workflows-dialog/save-workflows-dialog.component';
+import {Workflow} from './models/workflow';
 
 
 @Component({
@@ -12,8 +13,12 @@ import {SaveWorkflowsDialogComponent} from './save-workflows-dialog/save-workflo
 })
 export class AppComponent {
 
+  workflows: Workflow[];
+
   constructor(private dialog: MatDialog,
-              private workflowService: WorkflowService) {}
+              private workflowService: WorkflowService) {
+    this.workflows = this.workflowService.workflows;
+  }
 
   openUploadDialog(): void {
     this.dialog.open(UploadWorkflowsDialogComponent, { });

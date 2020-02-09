@@ -1,0 +1,13 @@
+<div [sortablejs]="defaultOperations" [sortablejsOptions]="{
+    group: {
+        name: 'shared',
+        pull: 'clone',
+        put: false
+    },
+    sort: false,
+    animation: 150
+}">
+  <div *ngFor="let defaultOperation of defaultOperations">
+    <app-operation-item [operation]="defaultOperation"></app-operation-item>
+  </div>
+</div>

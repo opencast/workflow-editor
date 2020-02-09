@@ -1,12 +1,17 @@
 <!-- Toolbar -->
 <mat-toolbar class="toolbar mat-elevation-z4" color="primary">
-  <span>Opencast Workflow Editor</span>
-  <button mat-stroked-button (click)="openUploadDialog()">Upload</button>
-  <button mat-stroked-button (click)="openSaveDialog()">Save</button>
-  <button mat-stroked-button>Select</button>
-  <button mat-stroked-button>New</button>
+  <mat-toolbar-row>
+    <span>Opencast Workflow Editor</span>
+    <button mat-stroked-button (click)="openUploadDialog()">Upload</button>
+    <button mat-stroked-button (click)="openSaveDialog()">Save</button>
+    <button mat-stroked-button matBadge="{{workflows.length}}" matBadgePosition="after" matBadgeColor="accent">Select</button>
+    <button mat-stroked-button>New</button>
+  </mat-toolbar-row>
 </mat-toolbar>
 
-<main class="content" role="main">
-  <app-workflow-list></app-workflow-list>
-</main>
+<div class="content" role="main" fxLayout="row" fxFill>
+  <div fxFlex="100" fxFill>
+    <app-workflow-list></app-workflow-list>
+  </div>
+</div>
+

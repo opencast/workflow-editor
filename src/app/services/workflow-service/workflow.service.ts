@@ -9,6 +9,7 @@ import {Role} from '../../models/role';
 import * as JSZip from 'jszip';
 import {JSZipObject} from 'jszip';
 import * as FileSaver from 'file-saver';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,43 @@ export class WorkflowService {
   };
 
   workflows: Workflow[] = [];
+  defaultOperations: Operation[] = [];
 
-  constructor() { }
+  constructor() {
+    const newWorkflow: Workflow = {id: 'new-workflow'};
+    this.workflows.push(newWorkflow);
+
+    const newOperation1: Operation = {
+      id: 'partial-import',
+      configurations: [
+        {key: 'source-presenter-flavor'},
+        {key: 'source-presentation-flavor'},
+        {key: 'source-smil-flavor'},
+        {key: 'target-presenter-flavor'},
+        {key: 'target-presentation-flavor'},
+        {key: 'concat-encoding-profile'},
+        {key: 'concat-output-framerate'},
+        {key: 'trim-encoding-profile'},
+        {key: 'force-encoding'},
+        {key: 'force-encoding-profile'},
+        {key: 'required-extensions'},
+        {key: 'enforce-divisible-by-two'}
+      ]
+    };
+
+    const newOperation2: Operation = {
+      id: 'multiencode',
+      configurations: [
+        {key: 'source-flavors'},
+        {key: 'target-flavors'},
+        {key: 'target-tags'},
+        {key: 'encoding-profiles'},
+        {key: 'tag-with-profile'}
+      ]
+    };
+    this.defaultOperations.push(newOperation1);
+    this.defaultOperations.push(newOperation2);
+  }
 
   private static parse2Tag(jsXmlTag): Tag {
     return {
@@ -80,7 +116,7 @@ export class WorkflowService {
     return (collection instanceof Array) ? collection : [collection];
   }
 
-  addWorkflow(workflow) {
+  addWorkflow(workflow: Workflow) {
     this.workflows.push(workflow);
   }
 

@@ -1,0 +1,17 @@
+.mat-card {
+  min-width: 250px;
+  margin: 30px auto;
+}
+
+.mat-card-content {
+  padding: 0px 10px;
+  width: 250px;
+}
+
+mat-card.container {
+
+}
+
+mat-card.container-item {
+  width: 250px;
+}

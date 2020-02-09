@@ -2,3 +2,13 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-tab-header {
+  position: fixed !important;
+  top: 64px;
+  z-index:100;
+  background: white;
+  width: 100%;
+}
+.content, .mat-tab-body-wrapper{
+  flex-grow: 1;
+}

@@ -11,6 +11,6 @@ export interface Workflow {
   tags?: Tag[];
   operations?: Operation[];
   roles?: Role[];
-  selected: boolean;
-  save: boolean;
+  selected?: boolean;
+  save?: boolean;
 }

@@ -12,11 +12,19 @@ export class SaveWorkflowsDialogComponent {
   workflows: Workflow[];
 
   constructor(private workflowService: WorkflowService) {
-    console.log(workflowService.workflows);
     this.workflows = workflowService.workflows;
   }
 
   submitSave() {
     this.workflowService.saveWorkflows();
+  }
+
+  submitSave2() {
+  }
+
+  onWrokflowSaveListChanged(workflowsSelected) {
+    workflowsSelected.selectedOptions.selected.map((item) => {
+      console.log(item);
+    });
   }
 }

@@ -6,8 +6,9 @@ mat-toolbar[color="primary"] {
   top: 0;
   position: fixed;
   height: var(--default-height);
+  z-index: 100;
 }
 
-main.content {
-  margin-top: 50px;
+.content {
+  margin-top: 113px;
 }

@@ -1,0 +1,12 @@
+<div [sortablejs]="workflow.operations" [sortablejsOptions]="{
+      animation: 150,
+      group: {
+        name: 'shared'
+      },
+      fallbackOnBody: true,
+      swapThreshold: 0.65
+    }">
+  <div *ngFor="let operation of workflow.operations">
+    <app-operation-item [operation]="operation"></app-operation-item>
+  </div>
+</div>
