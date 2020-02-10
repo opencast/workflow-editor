@@ -16,6 +16,13 @@ import {Role} from '../models/role';
 })
 export class EditWorkflowComponent implements OnInit {
 
+  editorOptions = {
+    theme: 'vs-light',
+    minimap: {
+      enabled: false
+    },
+    language: 'html'};
+
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [COMMA, TAB];
@@ -43,8 +50,7 @@ export class EditWorkflowComponent implements OnInit {
       map((roleValue: string | null) => roleValue ? this._filterRole(roleValue) : this.allRoles.slice()));
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   addTag(event: MatChipInputEvent) {
     console.log('add',event);

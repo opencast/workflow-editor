@@ -32,6 +32,7 @@ import { SelectWorkflowsDialogComponent } from './select-workflows-dialog/select
 import {AngularSplitModule} from 'angular-split';
 import { EditOperationComponent } from './edit-operation/edit-operation.component';
 import { EditWorkflowComponent } from './edit-workflow/edit-workflow.component';
+import {MonacoEditorModule} from 'ngx-monaco-editor';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { EditWorkflowComponent } from './edit-workflow/edit-workflow.component';
   imports: [
     BrowserModule,
     AngularSplitModule.forRoot(),
+    MonacoEditorModule.forRoot(),
     BrowserAnimationsModule,
     MatToolbarModule,
     MatDialogModule,

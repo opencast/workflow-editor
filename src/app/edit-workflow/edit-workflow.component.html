@@ -1,6 +1,6 @@
 <div>
   <form #form="ngForm" >
-    <p>
+    <div style="text-align: center">
       <mat-form-field class="ow-form-field" appearance="standard">
         <mat-label for="workflowId">ID:</mat-label>
         <input matInput type="text" class="form-control"
@@ -8,8 +8,8 @@
                name="workflowId"
                id="workflowId"/>
       </mat-form-field>
-    </p>
-    <p>
+    </div>
+    <div style="text-align: center">
       <mat-form-field class="ow-form-field" appearance="standard">
         <mat-label for="title">Title:</mat-label>
         <input matInput type="text" class="form-control"
@@ -17,8 +17,8 @@
                name="title"
                id="title"/>
       </mat-form-field>
-    </p>
-    <p>
+    </div>
+    <div style="text-align: center">
       <mat-form-field class="ow-form-field" appearance="standard">
         <mat-chip-list #tagList aria-label="Tag selection">
           <mat-chip
@@ -44,8 +44,8 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
-    </p>
-    <p>
+    </div>
+    <div style="text-align: center">
       <mat-form-field class="ow-form-field" appearance="standard">
         <mat-label for="description">Description:</mat-label>
         <textarea matInput class="form-control"
@@ -53,8 +53,8 @@
                   name="description"
                   id="description"></textarea>
       </mat-form-field>
-    </p>
-    <p>
+    </div>
+    <div style="text-align: center">
       <mat-form-field class="ow-form-field" appearance="standard">
         <mat-label for="displayOrder">Display Order:</mat-label>
         <input matInput type="number" class="form-control"
@@ -62,17 +62,8 @@
                name="displayOrder"
                id="displayOrder"/>
       </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field class="ow-form-field" appearance="standard">
-        <mat-label for="configurationPanel">Configuration Panel:</mat-label>
-        <textarea matInput class="form-control"
-                  [(ngModel)]="workflow.configurationPanel"
-                  name="configurationPanel"
-                  id="configurationPanel"></textarea>
-      </mat-form-field>
-    </p>
-    <p>
+    </div>
+    <div style="text-align: center">
       <mat-form-field class="ow-form-field" appearance="standard">
         <mat-chip-list #roleList aria-label="Role selection">
           <mat-chip
@@ -98,6 +89,10 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
-    </p>
+    </div>
+    <div>
+      <p>Configuration Panel:</p>
+      <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="workflow.configurationPanel" name="configurationPanel" style="height: 400px; width: 600px"></ngx-monaco-editor>
+    </div>
   </form>
 </div>
