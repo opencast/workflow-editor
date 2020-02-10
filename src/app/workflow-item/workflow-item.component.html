@@ -1,12 +1,65 @@
-<div [sortablejs]="workflow.operations" [sortablejsOptions]="{
-      animation: 150,
-      group: {
-        name: 'shared'
-      },
-      fallbackOnBody: true,
-      swapThreshold: 0.65
-    }">
-  <div *ngFor="let operation of workflow.operations">
-    <app-operation-item [operation]="operation"></app-operation-item>
-  </div>
-</div>
+<as-split direction="horizontal" class="workflow-view">
+  <as-split-area size="60" style="overflow-x: scroll" class="main-workflow-split">
+    <div class="workflow-wrapper">
+      <mat-card>
+        <mat-card-header>
+          <button mat-icon-button disableRipple class="edit-operation" (click)="openEditSidenav()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <mat-card-title>{{workflow.id}}</mat-card-title>
+          <mat-card-subtitle>{{workflow.description}}</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+      <div [sortablejs]="workflow.operations" [sortablejsOptions]="{
+        animation: 150,
+        group: {
+          name: 'shared'
+        },
+        fallbackOnBody: true,
+        swapThreshold: 0.65
+      }" style="min-height: 600px">
+        <div *ngFor="let operation of workflow.operations; let index = index">
+          <app-operation-item
+            [includedWorkflowSplit]="false"
+            [operation]="operation"
+            (workflowIncluded)="includeWorkflow($event)"
+            (operationSelected)="selectOperation($event)"
+            (operationEdited)="editOperation($event)"
+            [index]="index"
+            [workflow]="workflow"
+            [opCount]="workflow.operations.length"
+            [selected]="index === selectedOperationIndex"></app-operation-item>
+        </div>
+      </div>
+    </div>
+  </as-split-area>
+  <as-split-area size="20" *ngIf="includedWorkflow" class="included-workflow-split">
+    <div class="workflow-wrapper">
+      <mat-card class="container-item">
+        <mat-card-header>
+          <mat-card-title>{{includedWorkflow.id}}</mat-card-title>
+          <mat-card-subtitle>{{includedWorkflow.description}}</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+      <div *ngFor="let operation of includedWorkflow.operations; let index = index">
+        <app-operation-item
+          [includedWorkflowSplit]="true"
+          [operation]="operation"
+          [index]="index"
+          [workflow]="workflow"
+          [opCount]="workflow.operations.length"></app-operation-item>
+      </div>
+      <button mat-mini-fab disableRipple color="accent" class="close-included-workflow" (click)="closeIncludedWorkflow()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </as-split-area>
+  <as-split-area size="20" *ngIf="editedOperation" class="included-workflow-split">
+    <p>{{editedOperation.id}}</p>
+    <p>{{editedOperation.description}}</p>
+    <p>{{editedOperation.if}}</p>
+    <button mat-mini-fab disableRipple color="accent" class="close-included-workflow" (click)="closeEdit()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </as-split-area>
+</as-split>

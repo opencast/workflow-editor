@@ -2,14 +2,15 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { UploadWorkflowsDialogComponent } from './upload-workflows-dialog/upload-workflows-dialog.component';
 import {WorkflowService} from './services/workflow-service/workflow.service';
-import {SaveWorkflowsDialogComponent} from './save-workflows-dialog/save-workflows-dialog.component';
+import {DownloadWorkflowsDialogComponent} from './download-workflows-dialog/download-workflows-dialog.component';
 import {Workflow} from './models/workflow';
+import {SelectWorkflowsDialogComponent} from './select-workflows-dialog/select-workflows-dialog.component';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
 
@@ -24,7 +25,11 @@ export class AppComponent {
     this.dialog.open(UploadWorkflowsDialogComponent, { });
   }
 
-  openSaveDialog(): void {
-    this.dialog.open(SaveWorkflowsDialogComponent, { });
+  openDownloadDialog(): void {
+    this.dialog.open(DownloadWorkflowsDialogComponent, { });
+  }
+
+  openSelectDialog(): void {
+    this.dialog.open(SelectWorkflowsDialogComponent, { });
   }
 }

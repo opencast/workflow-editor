@@ -8,6 +8,11 @@
     animation: 150
 }">
   <div *ngFor="let defaultOperation of defaultOperations">
-    <app-operation-item [operation]="defaultOperation"></app-operation-item>
+    <div class="container-item">
+      <div class="header">
+        <div class="title">{{defaultOperation.id}}</div>
+        <div class="subtitle">{{defaultOperation.description}}</div>
+      </div>
+    </div>
   </div>
 </div>

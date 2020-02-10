@@ -1,0 +1,28 @@
+.main-workflow-split {
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+.main-workflow-split .workflow-wrapper {
+  max-height: calc(100vh - 113px);
+  min-width: 500px;
+  padding: 10px 20px 0 50px;
+}
+
+.included-workflow-split {
+  overflow-x: scroll !important;
+  overflow-y: scroll !important;
+  position: relative;
+}
+
+.included-workflow-split .workflow-wrapper {
+  max-height: calc(100vh - 113px);;
+  min-width: 300px;
+  padding: 10px 60px 0 20px;
+}
+
+.included-workflow-split .close-included-workflow {
+  position: absolute;
+  bottom: 40px;
+  right: 10px;
+  z-index: 100;
+}

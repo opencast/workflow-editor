@@ -1,0 +1,76 @@
+@import '~@angular/material/theming';
+@import '../app/download-workflows-dialog/download-workflows-dialog.component.scss';
+@import '../app/upload-workflows-dialog/upload-workflows-dialog.component.scss';
+@import '../app/operation-item/operation-item.component.scss';
+
+@include mat-core();
+
+
+$black-14-opacity: rgba(black, 0.14);
+$black-20-opacity: rgba(black, 0.2);
+
+$mat-opencast-blue: (
+  50: #e5f3fb,
+  100: #bee0f6,
+  200: #97cdf1,
+  300: #72baea,
+  400: #57abe7,
+  500: #409de3,
+  600: #388ed6,
+  700: #2f7dc4,
+  800: #286cb2,
+  900: #1b4f93,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity
+  )
+);
+
+$mat-opencast-green: (
+  50: #e4f6ed,
+  100: #bfe9d1,
+  200: #94dab4,
+  300: #64cc97,
+  400: #37c181,
+  500: #00b66a,
+  600: #00a660,
+  700: #009453,
+  800: #008247,
+  900: #006331,
+  A100: #159957,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity
+  )
+);
+
+$owe-app-primary: mat-palette($mat-opencast-blue, 600, 500, 800);
+$owe-app-accent:  mat-palette($mat-opencast-green, 300, 500, 800);
+$owe-app-warn:    mat-palette($mat-red);
+
+$owe-app-theme: mat-light-theme($owe-app-primary, $owe-app-accent, $owe-app-warn);
+
+@mixin owe-app-theme($theme) {
+  @include owe-download-dialog-theme($theme);
+  @include owe-upload-dialog-theme($theme);
+  @include owe-operation-item-theme($theme);
+}
+
+@include angular-material-theme($owe-app-theme);
+@include owe-app-theme($owe-app-theme);

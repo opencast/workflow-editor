@@ -3,8 +3,8 @@
   <mat-toolbar-row>
     <span>Opencast Workflow Editor</span>
     <button mat-stroked-button (click)="openUploadDialog()">Upload</button>
-    <button mat-stroked-button (click)="openSaveDialog()">Save</button>
-    <button mat-stroked-button matBadge="{{workflows.length}}" matBadgePosition="after" matBadgeColor="accent">Select</button>
+    <button mat-stroked-button (click)="openDownloadDialog()">Download</button>
+    <button mat-stroked-button (click)="openSelectDialog()" matBadgePosition="after" matBadgeColor="accent">Select</button>
     <button mat-stroked-button>New</button>
   </mat-toolbar-row>
 </mat-toolbar>

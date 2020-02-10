@@ -1,19 +1,19 @@
 <h2 mat-dialog-title>Upload a .zip-File containing Opencast-Workflow-XML-Files</h2>
 <mat-dialog-content>
-  <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDropUpload (fileDropped)="uploadFile($event)">
+  <div class="upload-file-container" (click)="fileInput.click()" appDragDropUpload (fileDropped)="uploadFile($event)">
     <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
   </div>
-  <div  class="files-list" *ngFor="let file of files;let i= index">
+  <div  class="upload-files-list" *ngFor="let file of files;let i= index">
     <p> {{ file.name }} </p>
-    <button class="delete-file" (click)="deleteAttachment(i)">
-      <img src="../../assets/Recycle_Bin_Full.png">
+    <button mat-icon-button disableRipple class="delete-file" (click)="removeFile(i)">
+        <mat-icon>delete_forever</mat-icon>
     </button>
   </div>
 </mat-dialog-content>
 
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close [disabled]="isLoading">Cancel</button>
-  <button mat-button (click)="submitUpload()" cdkFocusInitial [disabled]="isLoading || uploadDisabled">Upload</button>
+  <button mat-button (click)="submitUpload()" cdkFocusInitial [disabled]="uploadDisabled">Upload</button>
 
   <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" diameter="20"></mat-progress-spinner>
 </div>

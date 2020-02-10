@@ -3,7 +3,7 @@ import {Operation} from './operation';
 import {Role} from './role';
 
 export interface Workflow {
-  id?: string;
+  id: string;
   title?: string;
   description?: string;
   displayOrder?: number;
@@ -11,6 +11,6 @@ export interface Workflow {
   tags?: Tag[];
   operations?: Operation[];
   roles?: Role[];
-  selected?: boolean;
-  save?: boolean;
+  selected: boolean;
+  download: boolean;
 }

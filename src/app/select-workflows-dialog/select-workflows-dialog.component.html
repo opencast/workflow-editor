@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Select workflows</h2>
+<mat-slide-toggle [(ngModel)]="allSelected" (change)="toggleSelectAll()">Select all</mat-slide-toggle>
+<mat-dialog-content>
+  <mat-list role="list" *ngFor="let workflow of workflows; let i = index">
+    <mat-list-item class="selected-list" role="listitem">
+      <mat-slide-toggle [(ngModel)]="workflow.selected" (change)="updateSelectAll()">
+        {{workflow.id}}
+      </mat-slide-toggle>
+      <button mat-icon-button disableRipple class="delete-file" (click)="removeWorkflow(i)">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close [disabled]="isLoading">Cancel</button>
+</mat-dialog-actions>

@@ -1,0 +1,18 @@
+@mixin owe-download-dialog-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .download-files-list {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 10px auto;
+    background: mat-color($background, lighter);
+    border: 1px dashed;
+    border-radius: 12px;
+    padding: 0px;
+    color: mat-color($foreground);
+  }
+}

@@ -1,0 +1,64 @@
+@mixin owe-operation-item-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .container {
+    border: 1px solid mat-color($background);
+    margin: 30px auto;
+    padding: 0px 10px 10px 10px;
+  }
+
+  .container-item {
+    position: relative;
+    width: 250px;
+    cursor: move;
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+                0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+                0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+    margin: 30px auto;
+    padding: 0px 10px 10px 10px;
+  }
+
+  .delete-operation {
+    /*position: absolute;
+    top: 0;
+    right: 0;*/
+  }
+
+  .selected {
+    background-color: mat-color($accent);
+  }
+
+  .action-bar {
+    padding: 5px 0;
+    display: flex;
+    justify-content: flex-end;
+
+    .mat-icon-button {
+      padding: 0;
+      min-width: 0;
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+      line-height: 30px;
+      border-radius: 50%;
+
+      .mat-icon {
+        line-height: 20px;
+      }
+    }
+
+    .material-icons {
+      font-size: 20px;
+    }
+  }
+
+  .subtitle {
+    padding-top: 10px;
+    color: mat-color($foreground, secondary-text);
+  }
+}

@@ -1,0 +1,48 @@
+@mixin owe-upload-dialog-theme($theme) {
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .upload-files-list {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 10px auto;
+    background: mat-color($background, lighter);
+    border: 1px dashed;
+    border-radius: 12px;
+    padding: 0px 5px 0px 10px;
+    color: mat-color($background);
+  }
+
+  .upload-file-container {
+    background-image: url("../assets/cloud-2044823_960_720.png");
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: center;
+    height: 200px;
+    width: 80%;
+    margin: 20px auto;
+    border: 2px dashed mat-color($background, lighter, 0.5);
+    border-radius: 10px;
+  }
+
+  .upload-file-container:hover {
+    cursor: pointer;
+    background-color: mat-color($primary, lighter, 0.5) !important;
+    opacity: 0.8;
+  }
+
+  .upload-files-list .delete-file {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  .upload-files-list .delete-file mat-icon{
+    font-size: 30px;
+    width: 40px;
+    line-height: 32px;
+    width:30px;
+  }
+}

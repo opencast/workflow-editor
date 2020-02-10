@@ -5,7 +5,7 @@ import {WorkflowService} from '../services/workflow-service/workflow.service';
 @Component({
   selector: 'app-default-operation-list',
   templateUrl: './default-operation-list.component.html',
-  styleUrls: ['./default-operation-list.component.css']
+  styleUrls: ['./default-operation-list.component.scss']
 })
 export class DefaultOperationListComponent implements OnInit {
 

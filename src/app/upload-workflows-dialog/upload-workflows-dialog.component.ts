@@ -6,7 +6,7 @@ import {MatDialogRef} from '@angular/material';
 @Component({
   selector: 'app-upload-workflows-dialog',
   templateUrl: './upload-workflows-dialog.component.html',
-  styleUrls: ['./upload-workflows-dialog.component.css']
+  styleUrls: ['./upload-workflows-dialog.component.scss']
 })
 export class UploadWorkflowsDialogComponent {
   isLoading = false;
@@ -27,7 +27,7 @@ export class UploadWorkflowsDialogComponent {
     }
   }
 
-  deleteAttachment(index) {
+  removeFile(index) {
     this.files.splice(index, 1);
   }
 
@@ -36,6 +36,7 @@ export class UploadWorkflowsDialogComponent {
 
     this.isLoading = true;
     this.dialogRef.disableClose = true;
+    this.uploadDisabled = true;
 
     this.files.forEach((fileElement) => {
       console.log(fileElement.type);
@@ -57,9 +58,9 @@ export class UploadWorkflowsDialogComponent {
         // todo: Promise Exception
       })
       .finally(() => {
-        this.uploadDisabled = true;
         this.isLoading = false;
         this.dialogRef.disableClose = false;
+        this.uploadDisabled = false;
       });
   }
 }

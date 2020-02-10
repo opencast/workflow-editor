@@ -24,8 +24,8 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/styles.css"
+              "src/custom_theme/opencast-workflow-editor-theme.scss",
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -90,8 +90,8 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/styles.css"
+              "src/custom_theme/opencast-workflow-editor-theme.scss",
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -124,5 +124,10 @@
       }
     }
   },
-  "defaultProject": "opencast-workflow-editor"
+  "defaultProject": "opencast-workflow-editor",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

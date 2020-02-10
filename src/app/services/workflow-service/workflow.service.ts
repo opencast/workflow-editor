@@ -29,7 +29,12 @@ export class WorkflowService {
   defaultOperations: Operation[] = [];
 
   constructor() {
-    const newWorkflow: Workflow = {id: 'new-workflow'};
+    const newWorkflow: Workflow = {
+      id: 'new-workflow',
+      operations: [{id: 'new-operation'}],
+      download: true,
+      selected: true
+    };
     this.workflows.push(newWorkflow);
 
     const newOperation1: Operation = {
@@ -120,6 +125,18 @@ export class WorkflowService {
     this.workflows.push(workflow);
   }
 
+  removeWorkflow(index: number) {
+    this.workflows.splice(index, 1);
+  }
+
+  removeOperation(index: number, workflow: Workflow) {
+    workflow.operations.splice(index,1);
+  }
+
+  getWorkflowById(id: string):Workflow {
+    return this.workflows.filter((workflow) => workflow.id === id)[0];
+  }
+
   unzipFiles(element): Promise<void> {
     const asyncFn = (zipEntry: JSZipObject) => {
       return zipEntry.async('text');
@@ -158,10 +175,13 @@ export class WorkflowService {
     });
   }
 
-  saveWorkflows(): Promise<any> {
-    const zip = new JSZip();
-    if (this.workflows.length > 0) {
-      this.workflows.forEach((workflow) => {
+  downloadWorkflows(): Promise<any> {
+    const zip: JSZip = new JSZip();
+    const filteredWorkflows: Workflow[] = this.workflows.filter(workflow => workflow.download);
+    console.log(filteredWorkflows);
+
+    if (filteredWorkflows.length > 0) {
+      filteredWorkflows.forEach((workflow) => {
         zip.file(workflow.id + '.xml', this.parseWorkflow2Xml(workflow));
       });
 
@@ -185,7 +205,7 @@ export class WorkflowService {
       displayOrder: WorkflowService.getSafePropertyHelper(() => jsXmlWorkflow.displayOrder),
       configurationPanel: WorkflowService.getSafePropertyHelper(() => jsXmlWorkflow.configuration_panel.__cdata),
       selected: true,
-      save: true,
+      download: true
     };
 
     const tags = WorkflowService.getCollectionOfJsElements(

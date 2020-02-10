@@ -11,14 +11,26 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UploadWorkflowsDialogComponent } from './upload-workflows-dialog/upload-workflows-dialog.component';
 import { DragDropUploadDirective } from './drag-drop-upload.directive';
 import { WorkflowListComponent } from './workflow-list/workflow-list.component';
-import { SaveWorkflowsDialogComponent } from './save-workflows-dialog/save-workflows-dialog.component';
-import {MatBadgeModule, MatButtonToggleModule, MatCardModule, MatListModule, MatSlideToggleModule, MatTabsModule} from '@angular/material';
+import { DownloadWorkflowsDialogComponent } from './download-workflows-dialog/download-workflows-dialog.component';
+import {
+  MatBadgeModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatIconModule,
+  MatListModule,
+  MatSlideToggleModule,
+  MatTabsModule
+} from '@angular/material';
 import { WorkflowItemComponent } from './workflow-item/workflow-item.component';
 import { OperationItemComponent } from './operation-item/operation-item.component';
 import {SortablejsModule} from 'ngx-sortablejs';
 import { DefaultOperationListComponent } from './default-operation-list/default-operation-list.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
+import { SelectWorkflowsDialogComponent } from './select-workflows-dialog/select-workflows-dialog.component';
+import {AngularSplitModule} from 'angular-split';
+import { EditOperationComponent } from './edit-operation/edit-operation.component';
+import { EditWorkflowComponent } from './edit-workflow/edit-workflow.component';
 
 @NgModule({
   declarations: [
@@ -26,17 +38,22 @@ import {FormsModule} from '@angular/forms';
     UploadWorkflowsDialogComponent,
     DragDropUploadDirective,
     WorkflowListComponent,
-    SaveWorkflowsDialogComponent,
+    DownloadWorkflowsDialogComponent,
     WorkflowItemComponent,
     OperationItemComponent,
-    DefaultOperationListComponent
+    DefaultOperationListComponent,
+    SelectWorkflowsDialogComponent,
+    EditOperationComponent,
+    EditWorkflowComponent
   ],
   imports: [
     BrowserModule,
+    AngularSplitModule.forRoot(),
     BrowserAnimationsModule,
     MatToolbarModule,
     MatDialogModule,
     MatTabsModule,
+    MatIconModule,
     MatCardModule,
     FormsModule,
     MatBadgeModule,
@@ -59,6 +76,6 @@ import {FormsModule} from '@angular/forms';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [UploadWorkflowsDialogComponent, SaveWorkflowsDialogComponent]
+  entryComponents: [UploadWorkflowsDialogComponent, DownloadWorkflowsDialogComponent, SelectWorkflowsDialogComponent]
 })
 export class AppModule { }

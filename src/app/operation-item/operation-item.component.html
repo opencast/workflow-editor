@@ -1,27 +1,47 @@
 <div *ngIf="operation.if; else elseBlock">
-  <mat-card class="container">
-    <mat-card-header>
-      <mat-card-title>
+  <div class="container">
+    <div class="header">
+      <div class="title">
         {{operation.if}}
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div fxLayout="row">
-        <mat-card class="container-item">
-          <mat-card-header>
-            <mat-card-title>{{operation.id}}</mat-card-title>
-            <mat-card-subtitle>{{operation.description}}</mat-card-subtitle>
-          </mat-card-header>
-        </mat-card>
       </div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+    <div class="content">
+      <div class="container-item" [ngClass]="{selected : selected}">
+        <div class="header">
+          <div class="action-bar" *ngIf="!includedWorkflowSplit">
+            <button *ngIf="operation.id === 'include'" mat-icon-button disableRipple class="include-operation" (click)="includeOp(operation)">
+              <mat-icon>open_in_new</mat-icon>
+            </button>
+            <button mat-icon-button disableRipple class="edit-operation" (click)="editOp(index, operation)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button *ngIf="opCount > 1" mat-icon-button disableRipple class="delete-operation" (click)="removeOperation(index, workflow)">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+          </div>
+          <div class="title">{{operation.id}}</div>
+          <div class="subtitle">{{operation.description}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <ng-template #elseBlock>
-  <mat-card class="container-item">
-    <mat-card-header>
-      <mat-card-title>{{operation.id}}</mat-card-title>
-      <mat-card-subtitle>{{operation.description}}</mat-card-subtitle>
-    </mat-card-header>
-  </mat-card>
+  <div class="container-item" [ngClass]="{selected : selected}">
+    <div>
+      <div class="action-bar" *ngIf="!includedWorkflowSplit">
+        <button *ngIf="operation.id === 'include'" mat-icon-button disableRipple class="open-operation" (click)="includeOp(operation)">
+          <mat-icon>open_in_new</mat-icon>
+        </button>
+        <button mat-icon-button disableRipple class="edit-operation" (click)="editOp(index, operation)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button *ngIf="opCount > 1" mat-icon-button disableRipple class="delete-operation" (click)="removeOperation(index, workflow)">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+      </div>
+      <div class="title">{{operation.id}}</div>
+      <div class="subtitle">{{operation.description}}</div>
+    </div>
+  </div>
 </ng-template>

@@ -1,16 +1,21 @@
 .default-operation-list {
-  border-right: 1px solid black;
+  border-right: 1px solid rgba(0,0,0,.12);
   padding: 10px;
 }
 .default-operation-list .mat-card {
   width: 100%;
 }
 .workflow-item {
-  padding: 10px;
+  padding: 0 10px;
 }
 #tab-group{
   height: 100%;
 }
 #tab-group mat-tab-body {
   flex-grow: 1;
+}
+
+.toggle-operations-sidenav {
+  position: absolute;
+  z-index: 100;
 }

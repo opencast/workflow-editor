@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Save workflows as .zip-File</h2>
+<mat-slide-toggle [(ngModel)]="allSelected" (change)="toggleSelectAll()">Select all</mat-slide-toggle>
+<mat-dialog-content>
+  <mat-list role="list" *ngFor="let workflow of workflows">
+    <mat-list-item role="listitem">
+      <mat-slide-toggle [(ngModel)]="workflow.download" (change)="updateSelectAll()">
+        {{workflow.id}}.xml
+      </mat-slide-toggle>
+    </mat-list-item>
+  </mat-list>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close [disabled]="isLoading">Cancel</button>
+  <button mat-button cdkFocusInitial (click)="submitDownload()" [disabled]="uploadDisabled">Download</button>
+
+  <mat-progress-spinner *ngIf="isLoading" mode="indeterminate" diameter="20"></mat-progress-spinner>
+</mat-dialog-actions>

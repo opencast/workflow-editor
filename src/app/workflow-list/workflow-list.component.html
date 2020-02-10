@@ -1,14 +1,32 @@
-<mat-tab-group id="tab-group">
-    <mat-tab *ngFor="let workflow of workflows" label="{{workflow.id}}">
-        <mat-sidenav-container>
-            <mat-sidenav #sidenav mode="side" class="default-operation-list" fixedInViewport="true" fixedTopGap="113">
-              <button mat-stroked-button (click)="sidenav.toggle()">Close</button>
-              <app-default-operation-list></app-default-operation-list>
-            </mat-sidenav>
-          <mat-sidenav-content class="workflow-item">
-            <button mat-stroked-button (click)="sidenav.toggle()">Operations</button>
+
+<mat-sidenav-container>
+  <mat-sidenav mode="side" class="default-operation-list" fixedInViewport="true" fixedTopGap="64" opened>
+    <button mat-icon-button disableRipple (click)="toggleOperationsSidenav()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <app-default-operation-list></app-default-operation-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="workflow-item">
+    <mat-tab-group id="tab-group">
+      <div>
+      <ng-container *ngFor="let workflow of workflows">
+        <mat-tab *ngIf="workflow.selected">
+            <ng-template mat-tab-label>
+              <div class="col" style="margin-left: 20px;">{{workflow.id}}</div>
+              <button style="color:black" mat-icon-button disableRipple (click)="closeTab(workflow)">
+                <mat-icon>close</mat-icon>
+              </button>
+            </ng-template>
+            <button *ngIf="operationsSidenavOpened" class="toggle-operations-sidenav" mat-icon-button disableRipple (click)="toggleOperationsSidenav()">
+              <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+            <button *ngIf="!operationsSidenavOpened" class="toggle-operations-sidenav" mat-icon-button disableRipple (click)="toggleOperationsSidenav()">
+              <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
             <app-workflow-item [workflow]="workflow"></app-workflow-item>
-          </mat-sidenav-content>
-        </mat-sidenav-container>
-    </mat-tab>
-</mat-tab-group>
+        </mat-tab>
+      </ng-container>
+      </div>
+    </mat-tab-group>
+  </mat-sidenav-content>
+</mat-sidenav-container>
