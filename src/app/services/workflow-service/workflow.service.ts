@@ -31,7 +31,7 @@ export class WorkflowService {
   constructor() {
     const newWorkflow: Workflow = {
       id: 'new-workflow',
-      operations: [{id: 'new-operation'}],
+      operations: [{id: 'new-operation', selected: false}],
       download: true,
       selected: true
     };
@@ -52,7 +52,8 @@ export class WorkflowService {
         {key: 'force-encoding-profile'},
         {key: 'required-extensions'},
         {key: 'enforce-divisible-by-two'}
-      ]
+      ],
+      selected: false
     };
 
     const newOperation2: Operation = {
@@ -63,7 +64,8 @@ export class WorkflowService {
         {key: 'target-tags'},
         {key: 'encoding-profiles'},
         {key: 'tag-with-profile'}
-      ]
+      ],
+      selected: false
     };
     this.defaultOperations.push(newOperation1);
     this.defaultOperations.push(newOperation2);
@@ -83,7 +85,8 @@ export class WorkflowService {
       retryStrategy: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr['retry-strategy']),
       maxAttemps: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr['max-attempts']),
       failOnError: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr['fail-on-error']),
-      exceptionHandlerWorkflow: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr['exception-handler-workflow'])
+      exceptionHandlerWorkflow: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr['exception-handler-workflow']),
+      selected: false
     };
 
     const configurations = WorkflowService.getCollectionOfJsElements(
@@ -130,10 +133,10 @@ export class WorkflowService {
   }
 
   removeOperation(index: number, workflow: Workflow) {
-    workflow.operations.splice(index,1);
+    workflow.operations.splice(index, 1);
   }
 
-  getWorkflowById(id: string):Workflow {
+  getWorkflowById(id: string): Workflow {
     return this.workflows.filter((workflow) => workflow.id === id)[0];
   }
 

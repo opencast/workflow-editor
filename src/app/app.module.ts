@@ -13,10 +13,11 @@ import { DragDropUploadDirective } from './drag-drop-upload.directive';
 import { WorkflowListComponent } from './workflow-list/workflow-list.component';
 import { DownloadWorkflowsDialogComponent } from './download-workflows-dialog/download-workflows-dialog.component';
 import {
+  MatAutocompleteModule,
   MatBadgeModule,
   MatButtonToggleModule,
-  MatCardModule,
-  MatIconModule,
+  MatCardModule, MatChipsModule, MatFormFieldModule,
+  MatIconModule, MatInputModule,
   MatListModule,
   MatSlideToggleModule,
   MatTabsModule
@@ -26,7 +27,7 @@ import { OperationItemComponent } from './operation-item/operation-item.componen
 import {SortablejsModule} from 'ngx-sortablejs';
 import { DefaultOperationListComponent } from './default-operation-list/default-operation-list.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SelectWorkflowsDialogComponent } from './select-workflows-dialog/select-workflows-dialog.component';
 import {AngularSplitModule} from 'angular-split';
 import { EditOperationComponent } from './edit-operation/edit-operation.component';
@@ -52,10 +53,15 @@ import { EditWorkflowComponent } from './edit-workflow/edit-workflow.component';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatChipsModule,
     MatTabsModule,
     MatIconModule,
     MatCardModule,
+    MatAutocompleteModule,
     FormsModule,
+    ReactiveFormsModule,
     MatBadgeModule,
     MatListModule,
     MatSidenavModule,

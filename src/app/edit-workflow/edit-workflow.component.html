@@ -1,1 +1,103 @@
-<p>edit-workflow works!</p>
+<div>
+  <form #form="ngForm" >
+    <p>
+      <mat-form-field class="ow-form-field" appearance="standard">
+        <mat-label for="workflowId">ID:</mat-label>
+        <input matInput type="text" class="form-control"
+               [(ngModel)]="workflow.id"
+               name="workflowId"
+               id="workflowId"/>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="ow-form-field" appearance="standard">
+        <mat-label for="title">Title:</mat-label>
+        <input matInput type="text" class="form-control"
+               [(ngModel)]="workflow.title"
+               name="title"
+               id="title"/>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="ow-form-field" appearance="standard">
+        <mat-chip-list #tagList aria-label="Tag selection">
+          <mat-chip
+            *ngFor="let tag of workflow.tags"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="removeTag(tag)">
+            {{tag.value}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="New Tag..."
+            #tagInput
+            [formControl]="tagCtrl"
+            [matAutocomplete]="tagAuto"
+            [matChipInputFor]="tagList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="addTag($event)">
+        </mat-chip-list>
+        <mat-autocomplete #tagAuto="matAutocomplete" (optionSelected)="selectedTag($event)">
+          <mat-option *ngFor="let tagValue of filteredTags | async" [value]="tagValue">
+            {{tagValue}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="ow-form-field" appearance="standard">
+        <mat-label for="description">Description:</mat-label>
+        <textarea matInput class="form-control"
+                  [(ngModel)]="workflow.description"
+                  name="description"
+                  id="description"></textarea>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="ow-form-field" appearance="standard">
+        <mat-label for="displayOrder">Display Order:</mat-label>
+        <input matInput type="number" class="form-control"
+               [(ngModel)]="workflow.displayOrder"
+               name="displayOrder"
+               id="displayOrder"/>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="ow-form-field" appearance="standard">
+        <mat-label for="configurationPanel">Configuration Panel:</mat-label>
+        <textarea matInput class="form-control"
+                  [(ngModel)]="workflow.configurationPanel"
+                  name="configurationPanel"
+                  id="configurationPanel"></textarea>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="ow-form-field" appearance="standard">
+        <mat-chip-list #roleList aria-label="Role selection">
+          <mat-chip
+            *ngFor="let role of workflow.roles"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="removeRole(role)">
+            {{role.value}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="New Role..."
+            #roleInput
+            [formControl]="roleCtrl"
+            [matAutocomplete]="roleAuto"
+            [matChipInputFor]="roleList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="addRole($event)">
+        </mat-chip-list>
+        <mat-autocomplete #roleAuto="matAutocomplete" (optionSelected)="selectedRole($event)">
+          <mat-option *ngFor="let roleValue of filteredRoles | async" [value]="roleValue">
+            {{roleValue}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </p>
+  </form>
+</div>

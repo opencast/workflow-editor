@@ -1,1 +1,82 @@
-<p>edit-operation works!</p>
+<div>
+  <form #form="ngForm" >
+    <p>
+      <mat-form-field class="op-form-field" appearance="standard">
+        <mat-label for="operationId">ID:</mat-label>
+        <input matInput type="text" class="form-control"
+               [(ngModel)]="operation.id"
+               name="operationId"
+               id="operationId"/>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="op-form-field" appearance="standard">
+        <mat-label for="description">Description:</mat-label>
+        <textarea matInput class="form-control"
+               [(ngModel)]="operation.description"
+               name="description"
+               id="description"></textarea>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="op-form-field" appearance="standard">
+        <mat-label for="retry-strategy">Retry Strategy:</mat-label>
+        <input matInput type="text" class="form-control"
+               [(ngModel)]="operation.retryStrategy"
+               name="retry-strategy"
+               id="retry-strategy"/>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="op-form-field" appearance="standard">
+        <mat-label for="max-attemps">Max Attemps:</mat-label>
+        <input matInput type="number" class="form-control"
+               [(ngModel)]="operation.maxAttemps"
+               name="max-attemps"
+               id="max-attemps"/>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="op-form-field" appearance="standard">
+        <mat-label for="fail-on-error">Fail On Error:</mat-label>
+        <input matInput type="text" class="form-control"
+               [(ngModel)]="operation.failOnError"
+               name="fail-on-error"
+               id="fail-on-error"/>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="op-form-field" appearance="standard">
+        <mat-label for="exception-handler-workflow">Exception Handler Workflow:</mat-label>
+        <input matInput type="text" class="form-control"
+               [(ngModel)]="operation.exceptionHandlerWorkflow"
+               name="exception-handler-workflow"
+               id="exception-handler-workflow"/>
+      </mat-form-field>
+    </p>
+    <div *ngFor="let configuration of operation.configurations; let i = index" class="op-form-field-group">
+        <mat-form-field class="op-form-field" appearance="standard">
+          <mat-label for="configurationKey{{i}}">Key:</mat-label>
+          <input matInput class="form-control"
+                 name="configurationKey{{i}}"
+                 [(ngModel)]="configuration.key">
+        </mat-form-field>
+        <mat-form-field class="op-form-field" appearance="standard">
+          <mat-label for="configurationValue{{i}}">Value:</mat-label>
+          <input matInput class="form-control"
+                 name="configurationValue{{i}}"
+                 [(ngModel)]="configuration.value">
+        </mat-form-field>
+        <button mat-icon-button color="warn"
+                (click)="removeConfiguration(i)">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+    </div>
+    <div class="form-group">
+      <button mat-icon-button color="accent"
+              (click)="addConfiguration()" >
+        <mat-icon>add_circle_outline</mat-icon>
+      </button>
+    </div>
+  </form>
+</div>

@@ -9,4 +9,5 @@ export interface Operation {
   failOnError?: string;
   exceptionHandlerWorkflow?: string;
   configurations?: Configuration[];
+  selected: boolean;
 }

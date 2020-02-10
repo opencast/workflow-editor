@@ -13,7 +13,7 @@ import {MatSidenav, MatTab, MatTabGroup} from '@angular/material';
 export class WorkflowItemComponent implements OnInit {
 
   @Input() workflow: Workflow;
-  selectedOperationIndex: number = null;
+  edit: any = false;
   editedOperation: Operation = null;
   includedWorkflow: Workflow = null;
 
@@ -21,26 +21,38 @@ export class WorkflowItemComponent implements OnInit {
 
   ngOnInit() {}
 
+  includeWorkflow(operation: Operation) {
+    this.includedWorkflow = this.workflowService.getWorkflowById(
+      operation.configurations.filter((configuration) => configuration.key === 'workflow-id')[0].value);
+    // todo: if no workflow found
+  }
+
   editOperation(editedOperation: Operation) {
+    this.closeEditWorkflow();
+    this.workflow.operations
+      .map((op) => op.selected = false);
+    if (editedOperation !== null) {
+      editedOperation.selected = true;
+    }
     this.editedOperation = editedOperation;
   }
 
-  selectOperation(operationIndex: number) {
-    this.selectedOperationIndex = operationIndex;
-  }
-
-  includeWorkflow(operation: Operation) {
-    console.log('operation', operation);
-    this.includedWorkflow = this.workflowService.getWorkflowById(
-      operation.configurations.filter((configuration) => configuration.key === 'workflow-id')[0].value);
+  editWorkflow() {
+    this.closeEditOperation();
+    this.edit = true;
   }
 
   closeIncludedWorkflow() {
     this.includedWorkflow = null;
   }
 
-  closeEdit() {
+  closeEditOperation() {
+    this.workflow.operations
+      .map((op) => op.selected = false);
     this.editedOperation = null;
-    this.selectedOperationIndex = null;
+  }
+
+  closeEditWorkflow() {
+    this.edit = false;
   }
 }

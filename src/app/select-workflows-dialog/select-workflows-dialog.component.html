@@ -6,7 +6,7 @@
       <mat-slide-toggle [(ngModel)]="workflow.selected" (change)="updateSelectAll()">
         {{workflow.id}}
       </mat-slide-toggle>
-      <button mat-icon-button disableRipple class="delete-file" (click)="removeWorkflow(i)">
+      <button mat-icon-button disableRipple color="warn" class="delete-file" (click)="removeWorkflow(i)">
         <mat-icon>delete_forever</mat-icon>
       </button>
     </mat-list-item>

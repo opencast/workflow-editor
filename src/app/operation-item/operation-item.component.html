@@ -6,16 +6,16 @@
       </div>
     </div>
     <div class="content">
-      <div class="container-item" [ngClass]="{selected : selected}">
+      <div class="container-item" [ngClass]="{selected : operation.selected}">
         <div class="header">
           <div class="action-bar" *ngIf="!includedWorkflowSplit">
             <button *ngIf="operation.id === 'include'" mat-icon-button disableRipple class="include-operation" (click)="includeOp(operation)">
               <mat-icon>open_in_new</mat-icon>
             </button>
-            <button mat-icon-button disableRipple class="edit-operation" (click)="editOp(index, operation)">
+            <button mat-icon-button disableRipple class="edit-operation" (click)="editOp(operation)">
               <mat-icon>edit</mat-icon>
             </button>
-            <button *ngIf="opCount > 1" mat-icon-button disableRipple class="delete-operation" (click)="removeOperation(index, workflow)">
+            <button *ngIf="opCount > 1" mat-icon-button color="warn" disableRipple class="delete-operation" (click)="removeOperation(index, workflow)">
               <mat-icon>delete_forever</mat-icon>
             </button>
           </div>
@@ -27,16 +27,16 @@
   </div>
 </div>
 <ng-template #elseBlock>
-  <div class="container-item" [ngClass]="{selected : selected}">
+  <div class="container-item" [ngClass]="{selected : operation.selected}">
     <div>
       <div class="action-bar" *ngIf="!includedWorkflowSplit">
         <button *ngIf="operation.id === 'include'" mat-icon-button disableRipple class="open-operation" (click)="includeOp(operation)">
           <mat-icon>open_in_new</mat-icon>
         </button>
-        <button mat-icon-button disableRipple class="edit-operation" (click)="editOp(index, operation)">
+        <button mat-icon-button disableRipple class="edit-operation" (click)="editOp(operation)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button *ngIf="opCount > 1" mat-icon-button disableRipple class="delete-operation" (click)="removeOperation(index, workflow)">
+        <button *ngIf="opCount > 1" mat-icon-button color="warn" disableRipple class="delete-operation" (click)="removeOperation(index, workflow)">
           <mat-icon>delete_forever</mat-icon>
         </button>
       </div>

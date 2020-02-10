@@ -8,7 +8,7 @@ import {Workflow} from '../models/workflow';
   selector: 'app-operation-item',
   templateUrl: './operation-item.component.html',
   styleUrls: ['./operation-item.component.scss'],
-  inputs: ['includedWorkflowSplit', 'operation', 'index', 'workflow', 'opCount', 'selected'],
+  inputs: ['includedWorkflowSplit', 'operation', 'index', 'workflow', 'opCount'],
   outputs: ['operationSelected', 'operationEdited', 'workflowIncluded']
 })
 export class OperationItemComponent implements OnInit {
@@ -18,8 +18,6 @@ export class OperationItemComponent implements OnInit {
   index: number;
   workflow: Workflow;
   opCount: number;
-  selected: boolean;
-  operationSelected = new EventEmitter();
   operationEdited = new EventEmitter();
   workflowIncluded = new EventEmitter();
 
@@ -28,15 +26,13 @@ export class OperationItemComponent implements OnInit {
   ngOnInit() {}
 
   removeOperation(index: number, workflow: Workflow) {
-    if (this.selected) {
-      this.operationSelected.emit(index - 1);
-      this.operationEdited.emit(workflow.operations[index - 1]);
+    if (this.operation.selected) {
+      this.editOp(null);
     }
     this.workflowService.removeOperation(index, workflow);
   }
 
-  editOp(index: number, operation: Operation) {
-    this.operationSelected.emit(index);
+  editOp(operation: Operation) {
     this.operationEdited.emit(operation);
   }
 
