@@ -40,39 +40,6 @@ export class WorkflowService {
 
 
     this.initDefaultOperations(defaultOperationParamList);
-
-    const newOperation1: Operation = {
-      id: 'partial-import',
-      configurations: [
-        {key: 'source-presenter-flavor'},
-        {key: 'source-presentation-flavor'},
-        {key: 'source-smil-flavor'},
-        {key: 'target-presenter-flavor'},
-        {key: 'target-presentation-flavor'},
-        {key: 'concat-encoding-profile'},
-        {key: 'concat-output-framerate'},
-        {key: 'trim-encoding-profile'},
-        {key: 'force-encoding'},
-        {key: 'force-encoding-profile'},
-        {key: 'required-extensions'},
-        {key: 'enforce-divisible-by-two'}
-      ],
-      selected: false
-    };
-
-    const newOperation2: Operation = {
-      id: 'multiencode',
-      configurations: [
-        {key: 'source-flavors'},
-        {key: 'target-flavors'},
-        {key: 'target-tags'},
-        {key: 'encoding-profiles'},
-        {key: 'tag-with-profile'}
-      ],
-      selected: false
-    };
-    this.defaultOperations.push(newOperation1);
-    this.defaultOperations.push(newOperation2);
   }
 
   private static parse2Tag(jsXmlTag): Tag {

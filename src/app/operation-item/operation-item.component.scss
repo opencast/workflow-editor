@@ -17,11 +17,11 @@
 
     & > .header .title {
       text-align: center;
+      margin-bottom: 5px;
       border-bottom: 1px solid mat-color($background);
     }
 
     .vertical-connector {
-      margin-top: 5px;
       display: flex;
       .left-connector, .right-connector {
         box-sizing: border-box;
