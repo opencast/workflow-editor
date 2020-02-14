@@ -3,25 +3,17 @@
     <div class="workflow-outer-wrapper">
       <div class="workflow-inner-wrapper">
         <mat-card>
-          <mat-card-header>
+          <div class="action-bar">
             <button mat-icon-button disableRipple class="edit-operation" (click)="editWorkflow()">
               <mat-icon>edit</mat-icon>
             </button>
+          </div>
+          <mat-card-header>
             <mat-card-title>{{workflow.id}}</mat-card-title>
             <mat-card-subtitle>{{workflow.description}}</mat-card-subtitle>
-            <div *ngFor="let tag of workflow.tags">
-              {{tag.value}}
-            </div>
           </mat-card-header>
         </mat-card>
-        <div [sortablejs]="workflow.operations" [sortablejsOptions]="{
-          animation: 150,
-          group: {
-            name: 'shared'
-          },
-          fallbackOnBody: true,
-          swapThreshold: 0.65
-        }" style="min-height: 600px">
+        <div [sortablejs]="workflow.operations" [sortablejsOptions]="options" style="min-height: 600px">
           <div *ngFor="let operation of workflow.operations; let index = index">
             <app-operation-item
               [includedWorkflowSplit]="false"
@@ -29,8 +21,7 @@
               (workflowIncluded)="includeWorkflow($event)"
               (operationEdited)="editOperation($event)"
               [index]="index"
-              [workflow]="workflow"
-              [opCount]="workflow.operations.length"></app-operation-item>
+              [workflow]="workflow"></app-operation-item>
           </div>
         </div>
       </div>
@@ -50,8 +41,7 @@
             [includedWorkflowSplit]="true"
             [operation]="operation"
             [index]="index"
-            [workflow]="workflow"
-            [opCount]="workflow.operations.length"></app-operation-item>
+            [workflow]="workflow"></app-operation-item>
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ import * as JSZip from 'jszip';
 import {JSZipObject} from 'jszip';
 import * as FileSaver from 'file-saver';
 import * as _ from 'lodash';
+import {DefaultOperationParamList, defaultOperationParamList} from '../../models/default-operation-param-list';
 
 @Injectable({
   providedIn: 'root'
@@ -31,11 +32,14 @@ export class WorkflowService {
   constructor() {
     const newWorkflow: Workflow = {
       id: 'new-workflow',
-      operations: [{id: 'new-operation', selected: false}],
+      operations: [],
       download: true,
       selected: true
     };
     this.workflows.push(newWorkflow);
+
+
+    this.initDefaultOperations(defaultOperationParamList);
 
     const newOperation1: Operation = {
       id: 'partial-import',
@@ -124,12 +128,43 @@ export class WorkflowService {
     return (collection instanceof Array) ? collection : [collection];
   }
 
+  private initDefaultOperations(paramList: DefaultOperationParamList[]) {
+    paramList.forEach((params) => {
+      const requiredConfs: Configuration[] = [];
+
+      if (typeof (params.configurationKeys) !== 'undefined') {
+        params.configurationKeys
+          .filter((configurationKey) => configurationKey.charAt(configurationKey.length - 1) === '*')
+          .forEach((configurationKey) => {
+            requiredConfs.push({
+              key: configurationKey.slice(0, -1),
+              required: true
+            });
+          });
+      }
+
+      this.defaultOperations.push({
+        id: params.id,
+        ...(typeof (params.configurationKeys) !== 'undefined') && {configurations: requiredConfs},
+        selected: false
+      });
+    });
+  }
+
   addWorkflow(workflow: Workflow) {
     this.workflows.push(workflow);
   }
 
   removeWorkflow(index: number) {
     this.workflows.splice(index, 1);
+  }
+
+  addOperation(operation: Operation, index: number, workflow: Workflow) {
+    workflow.operations.splice(index, 0, operation);
+  }
+
+  getOperation(index: number, workflow: Workflow): Operation {
+    return workflow.operations[index];
   }
 
   removeOperation(index: number, workflow: Workflow) {

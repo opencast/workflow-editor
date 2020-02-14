@@ -17,7 +17,6 @@ export class OperationItemComponent implements OnInit {
   includedWorkflowSplit: boolean;
   index: number;
   workflow: Workflow;
-  opCount: number;
   operationEdited = new EventEmitter();
   workflowIncluded = new EventEmitter();
 

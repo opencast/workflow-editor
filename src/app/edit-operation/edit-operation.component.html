@@ -1,5 +1,5 @@
 <div>
-  <form #form="ngForm" >
+  <form #form="ngForm"  class="edit-operation-form">
     <p>
       <mat-form-field class="op-form-field" appearance="standard">
         <mat-label for="operationId">ID:</mat-label>
@@ -11,11 +11,20 @@
     </p>
     <p>
       <mat-form-field class="op-form-field" appearance="standard">
+        <mat-label for="operationId">If-Condition:</mat-label>
+        <textarea matInput class="form-control"
+                  [(ngModel)]="operation.if"
+                  name="operationIfCondition"
+                  id="operationIfCondition"></textarea>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="op-form-field" appearance="standard">
         <mat-label for="description">Description:</mat-label>
         <textarea matInput class="form-control"
-               [(ngModel)]="operation.description"
-               name="description"
-               id="description"></textarea>
+                  [(ngModel)]="operation.description"
+                  name="description"
+                  id="description"></textarea>
       </mat-form-field>
     </p>
     <p>
@@ -54,6 +63,7 @@
                id="exception-handler-workflow"/>
       </mat-form-field>
     </p>
+    <p style="text-align: left">Configurations:</p>
     <div *ngFor="let configuration of operation.configurations; let i = index" class="op-form-field-group">
         <mat-form-field class="op-form-field" appearance="standard">
           <mat-label for="configurationKey{{i}}">Key:</mat-label>

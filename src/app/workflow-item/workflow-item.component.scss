@@ -9,6 +9,9 @@
   overflow-y: scroll !important;
 }
 .main-workflow-split .workflow-inner-wrapper {
+  display: inline-block;
+  min-width: 100%;
+  box-sizing: border-box;
   padding: 10px 20px 50px 50px;
 }
 
@@ -30,8 +33,10 @@
 .included-workflow-split .workflow-inner-wrapper,
 .edit-operation-split .edit-operation-inner-wrapper,
 .edit-workflow-split .edit-workflow-inner-wrapper {
-  min-width: 300px;
-  padding: 10px 20px 50px 50px;
+  display: inline-block;
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 10px 20px 50px 70px;
 }
 
 .included-workflow-split .close-included-workflow,
@@ -49,4 +54,28 @@
   min-width: 600px;
   width: 600px;
   margin: 0 auto;
+}
+
+.main-workflow-split .workflow-inner-wrapper .action-bar {
+  padding: 5px 0;
+  display: flex;
+  justify-content: flex-end;
+
+  .mat-icon-button {
+    padding: 0;
+    min-width: 0;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    line-height: 30px;
+    border-radius: 50%;
+
+    .mat-icon {
+      line-height: 20px;
+    }
+  }
+
+  .material-icons {
+    font-size: 20px;
+  }
 }

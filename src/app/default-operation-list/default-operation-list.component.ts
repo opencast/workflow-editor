@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Operation} from '../models/operation';
+import { Options } from 'sortablejs';
 import {WorkflowService} from '../services/workflow-service/workflow.service';
 
 @Component({
@@ -10,6 +11,16 @@ import {WorkflowService} from '../services/workflow-service/workflow.service';
 export class DefaultOperationListComponent implements OnInit {
 
   defaultOperations: Operation[] = [];
+
+  defaultOpsOptions: Options = {
+    group: {
+      name: 'shared',
+      pull: 'clone',
+      put: false
+    },
+    sort: false,
+    animation: 150
+  };
 
   constructor(private workflowService: WorkflowService) {
     this.defaultOperations = this.workflowService.defaultOperations;

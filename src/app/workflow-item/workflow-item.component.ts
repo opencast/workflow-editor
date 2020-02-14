@@ -1,8 +1,9 @@
 import {Component, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {Workflow} from '../models/workflow';
-import { Options } from 'sortablejs';
+import {Options, SortableEvent} from 'sortablejs';
 import {WorkflowService} from '../services/workflow-service/workflow.service';
 import {Operation} from '../models/operation';
+import * as _ from 'lodash';
 import {MatSidenav, MatTab, MatTabGroup} from '@angular/material';
 
 @Component({
@@ -16,8 +17,28 @@ export class WorkflowItemComponent implements OnInit {
   edit: any = false;
   editedOperation: Operation = null;
   includedWorkflow: Workflow = null;
+  options: Options = {
+    animation: 150,
+    group: {
+      name: 'shared'
+    },
+    fallbackOnBody: true,
+    swapThreshold: 0.65
+  };
 
-  constructor(private workflowService: WorkflowService) {  }
+  constructor(private workflowService: WorkflowService) {
+    this.options = {
+      onAdd: (event: SortableEvent) => {
+        const clonedOperation: Operation = _.cloneDeep(this.workflowService.getOperation(event.newIndex, this.workflow));
+        this.workflowService.removeOperation(event.newIndex, this.workflow);
+        this.workflowService.addOperation(clonedOperation, event.newIndex, this.workflow);
+      },
+      setData: (dataTransfer) => {
+        var img = new Image();
+        dataTransfer.setDragImage(img, 0, 0);
+      }
+    };
+  }
 
   ngOnInit() {}
 

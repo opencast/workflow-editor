@@ -12,3 +12,17 @@ mat-toolbar[color="primary"] {
 .content {
   margin-top: 113px;
 }
+
+.mat-toolbar {
+  .brand-title {
+    display: inline-block;
+    text-align: center;
+    width: 300px;
+    margin: 0 auto;
+  }
+  .action-bar {
+    .mat-stroked-button {
+      margin: 0 8px;
+    }
+  }
+}
