@@ -1,3 +1,28 @@
+<div class="container-item operation-item" [ngClass]="{selected : operation.selected}">
+  <div class="header">
+    <div class="action-bar" *ngIf="!includedWorkflowSplit">
+      <button mat-icon-button disableRipple class="edit-operation" (click)="editOp(operation)" *ngIf="operation.ifError">
+        <mat-icon>warning</mat-icon>
+      </button>
+      <button mat-icon-button disableRipple class="edit-operation" (click)="editOp(operation)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button disableRipple class="duplicate-operation" (click)="duplicateOp(operation)">
+        <mat-icon>file_copy</mat-icon>
+      </button>
+      <button *ngIf="operation.id === 'include'" mat-icon-button disableRipple class="include-operation" (click)="includeOp(operation)">
+        <mat-icon>open_in_new</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" disableRipple class="delete-operation" (click)="removeOperation(index, workflow)">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+    </div>
+    <div class="title">{{operation.id}}</div>
+    <div class="subtitle">{{operation.description}}</div>
+  </div>
+</div>
+
+<!--
 <div *ngIf="operation.if; else elseBlock" style="width:100%">
   <div class="container">
     <div class="header">
@@ -54,12 +79,14 @@
           </div>
         </div>
 
+
         <div class="empty-path">
           <div class="vertical-connector">
             <div class="left-connector"></div>
             <div class="right-connector"></div>
           </div>
         </div>
+
 
       </div>
     </div>
@@ -118,3 +145,4 @@
     </div>
   </div>
 </ng-template>
+-->

@@ -1,0 +1,127 @@
+<ng-template #tmplOperation let-condition="condition" let-condValue="condValue">
+    <app-operation-item
+      [includedWorkflowSplit]="false"
+      [operation]="condition.left[0]"
+      (workflowIncluded)="includeWorkflow($event)"
+      (operationEdited)="editOperation($event)"
+      [index]="index"
+      [condValue]="condValue"
+      [workflow]="workflow" *ngIf="!includedWorkflowSplit"></app-operation-item>
+    <app-operation-item
+      [includedWorkflowSplit]="true"
+      [operation]="condition.left[0]"
+      [index]="index"
+      [condValue]="condValue"
+      [workflow]="workflow" *ngIf="includedWorkflowSplit"></app-operation-item>
+</ng-template>
+
+<!--<ng-template #condContainer let-condition="condition" let-condValue="condValue">-->
+<div *ngIf="condition.value !== ''; else elseBlock">
+  <div class="container">
+    <div class="header">
+      <div class="title">
+        IF: {{condition.value}}
+      </div>
+    </div>
+    <div class="vertical-connector">
+      <div class="left-connector"></div>
+      <div class="right-connector"></div>
+    </div>
+    <div class="container-children">
+      <div class="container-child-left">
+        <div class="cond-title-pos" style="position:absolute;top:-30px;text-align:center; width: 100%;">Yes</div>
+        <ng-container *ngTemplateOutlet="tmplCondOperation, context:{condition:condition, condValue: condValue, col:'left'}"></ng-container>
+      </div>
+      <div class="container-child-right">
+        <div class="cond-title-neg" style="position:absolute;top:-30px;text-align:center; width: 100%;">No</div>
+        <ng-container *ngTemplateOutlet="tmplCondOperation, context:{condition:condition, condValue: condValue, col:'right'}"></ng-container>
+      </div>
+    </div>
+    <div class="container-output-connector">
+      <div class="vertical-connector">
+        <div class="left-connector"></div>
+        <div class="right-connector"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #elseBlock>
+  <ng-container *ngTemplateOutlet="tmplOperation, context:{condition:condition, condValue: condition.value}"></ng-container>
+</ng-template>
+<!--</ng-template>-->
+
+
+<ng-template #tmplCondOperation let-condition="condition" let-condValue="condValue" let-col="col">
+  <div class="horizontal-connector">
+    <div class="table-row-connector">
+      <div class="table-cell-connector">
+        <div class="top-line-connector"></div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="col === 'left'">
+    <div [sortablejs]="condition.left" [sortablejsOptions]="options" class="condition-left" [attr.data-cond]="condValue + condition.value" *ngIf="!includedWorkflowSplit; else workflowSplitLeft">
+      <ng-container *ngTemplateOutlet="tmplSortableLeft, context:{condition:condition, condValue: condValue}"></ng-container>
+    </div>
+    <ng-template #workflowSplitLeft>
+      <ng-container *ngTemplateOutlet="tmplSortableLeft, context:{condition:condition, condValue: condValue}"></ng-container>
+    </ng-template>
+  </div>
+  <div *ngIf="col === 'right'">
+    <div [sortablejs]="condition.right" [sortablejsOptions]="options" class="condition-right" [attr.data-cond]="condValue + ' NOT(' + condition.value + ')'" *ngIf="!includedWorkflowSplit; else workflowSplitRight">
+      <ng-container *ngTemplateOutlet="tmplSortableRight, context:{condition:condition, condValue: condValue}"></ng-container>
+    </div>
+    <ng-template #workflowSplitRight>
+      <ng-container *ngTemplateOutlet="tmplSortableRight, context:{condition:condition, condValue: condValue}"></ng-container>
+    </ng-template>
+  </div>
+  <div class="empty-path">
+    <div class="vertical-connector">
+      <div class="left-connector"></div>
+      <div class="right-connector"></div>
+    </div>
+  </div>
+  <div class="horizontal-connector">
+    <div class="table-row-connector">
+      <div class="table-cell-connector">
+        <div class="top-line-connector"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #tmplSortableLeft let-condition="condition" let-condValue="condValue" let-col="col">
+  <div *ngFor="let condOperation of condition.left; let index = index">
+    <div *ngIf="condOperation.left !== undefined && condOperation.value === ''">
+      <ng-container *ngTemplateOutlet="tmplOperation, context:{condition: condOperation, condValue: condValue + condition.value}"></ng-container>
+    </div>
+    <div *ngIf="condOperation.left !== undefined && condOperation.value !== ''">
+      <app-condition-item
+        [includedWorkflowSplit]="false"
+        [condition]="condOperation"
+        (workflowIncluded)="includeWorkflow($event)"
+        (operationEdited)="editOperation($event)"
+        [index]="index"
+        [condValue]="condValue + condition.value + ' AND '"
+        [workflow]="workflow"
+      ></app-condition-item>
+    </div>
+  </div>
+</ng-template>
+<ng-template #tmplSortableRight let-condition="condition" let-condValue="condValue" let-col="col">
+  <div *ngFor="let condOperation of condition.right; let index = index">
+    <div *ngIf="condOperation.left !== undefined && condOperation.value === ''">
+      <ng-container *ngTemplateOutlet="tmplOperation, context:{condition: condOperation, condValue: condValue + 'NOT(' + condition.value + ')'}"></ng-container>
+    </div>
+    <div *ngIf="condOperation.right !== undefined && condOperation.value !== ''">
+      <app-condition-item
+        [includedWorkflowSplit]="false"
+        [condition]="condOperation"
+        (workflowIncluded)="includeWorkflow($event)"
+        (operationEdited)="editOperation($event)"
+        [index]="index"
+        [condValue]="condValue + 'NOT(' + condition.value + ')' + ' AND '"
+        [workflow]="workflow"
+      ></app-condition-item>
+    </div>
+  </div>
+</ng-template>

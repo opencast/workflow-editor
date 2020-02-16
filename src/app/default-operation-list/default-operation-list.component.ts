@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Operation} from '../models/operation';
 import { Options } from 'sortablejs';
 import {WorkflowService} from '../services/workflow-service/workflow.service';
+import {Condition} from '../models/condition';
 
 @Component({
   selector: 'app-default-operation-list',
@@ -10,7 +11,7 @@ import {WorkflowService} from '../services/workflow-service/workflow.service';
 })
 export class DefaultOperationListComponent implements OnInit {
 
-  defaultOperations: Operation[] = [];
+  defaultOperations: Condition[] = [];
 
   defaultOpsOptions: Options = {
     group: {

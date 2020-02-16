@@ -2,7 +2,7 @@ import {Configuration} from './configuration';
 
 export interface Operation {
   id?: string;
-  if?: string;
+  if: string;
   description?: string;
   retryStrategy?: string;
   maxAttemps?: number;
@@ -10,4 +10,5 @@ export interface Operation {
   exceptionHandlerWorkflow?: string;
   configurations?: Configuration[];
   selected: boolean;
+  ifError?: string;
 }

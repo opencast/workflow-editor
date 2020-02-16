@@ -7,8 +7,8 @@
 
   .container {
     border: 1px solid mat-color($background);
-    margin: 50px auto 0 auto;
-    padding: 0px 10px 10px 10px;
+    margin: 44px auto 0 auto;
+    padding: 0px 10px 1px 10px;
     position: relative;
     flex-wrap: nowrap;
     display: inline-block;
@@ -88,7 +88,8 @@
     }
 
     .container-output-connector > .vertical-connector:first-child > .left-connector {
-      border-right: medium none mat-color($background);
+      //border-right: medium none mat-color($background);
+      min-height: 30px;
       /*min-width: 270px;*/
     }
 
@@ -104,6 +105,7 @@
         min-width: 270px;
         display: flex;
         flex-direction: column;
+        position: relative;
       }
       .container-child-right {
         flex-grow: 1;
@@ -111,6 +113,11 @@
         min-width: 270px;
         display: flex;
         flex-direction: column;
+        position: relative;
+      }
+
+      .empty-path.min-height .vertical-connector {
+        min-height: 200px;
       }
     }
 

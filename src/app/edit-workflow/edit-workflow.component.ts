@@ -53,7 +53,6 @@ export class EditWorkflowComponent implements OnInit {
   ngOnInit() {}
 
   addTag(event: MatChipInputEvent) {
-    console.log('add',event);
     const input = event.input;
     const value = event.value;
 
@@ -79,7 +78,6 @@ export class EditWorkflowComponent implements OnInit {
   }
 
   selectedTag(event: MatAutocompleteSelectedEvent): void {
-    console.log('select',event);
     if (this.workflow.tags === undefined) { this.workflow.tags = []; }
     this.workflow.tags.push({value: event.option.viewValue});
     this.tagInput.nativeElement.value = '';

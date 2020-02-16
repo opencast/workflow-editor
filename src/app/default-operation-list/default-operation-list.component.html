@@ -1,10 +1,10 @@
 <div class="default-operation-list-wrapper">
-  <div [sortablejs]="defaultOperations" [sortablejsOptions]="defaultOpsOptions">
+  <div [sortablejs]="defaultOperations" [sortablejsOptions]="defaultOpsOptions" class="default-operation-list">
     <div *ngFor="let defaultOperation of defaultOperations">
       <div class="container-item">
         <div class="header">
-          <div class="title">{{defaultOperation.id}}</div>
-          <div class="subtitle">{{defaultOperation.description}}</div>
+          <div class="title">{{defaultOperation.left[0].id}}</div>
+          <div class="subtitle">{{defaultOperation.left[0].description}}</div>
         </div>
       </div>
     </div>

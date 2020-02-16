@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Operation} from '../models/operation';
 import * as Sortable from 'sortablejs';
 import {WorkflowService} from '../services/workflow-service/workflow.service';
@@ -8,12 +8,13 @@ import {Workflow} from '../models/workflow';
   selector: 'app-operation-item',
   templateUrl: './operation-item.component.html',
   styleUrls: ['./operation-item.component.scss'],
-  inputs: ['includedWorkflowSplit', 'operation', 'index', 'workflow', 'opCount'],
+  inputs: ['includedWorkflowSplit', 'operation', 'index', 'workflow', 'opCount', 'condValue'],
   outputs: ['operationSelected', 'operationEdited', 'workflowIncluded']
 })
-export class OperationItemComponent implements OnInit {
+export class OperationItemComponent implements OnInit, OnChanges {
 
   operation: Operation;
+  condValue: string;
   includedWorkflowSplit: boolean;
   index: number;
   workflow: Workflow;
@@ -23,6 +24,10 @@ export class OperationItemComponent implements OnInit {
   constructor(private workflowService: WorkflowService) {}
 
   ngOnInit() {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.operation.if = this.condValue;
+  }
 
   removeOperation(index: number, workflow: Workflow) {
     if (this.operation.selected) {
@@ -37,5 +42,9 @@ export class OperationItemComponent implements OnInit {
 
   includeOp(operation: Operation) {
     this.workflowIncluded.emit(operation);
+  }
+
+  duplicateOp(operation: Operation) {
+    // todo
   }
 }

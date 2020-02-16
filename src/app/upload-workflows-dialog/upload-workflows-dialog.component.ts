@@ -39,7 +39,6 @@ export class UploadWorkflowsDialogComponent {
     this.uploadDisabled = true;
 
     this.files.forEach((fileElement) => {
-      console.log(fileElement.type);
       if (fileElement.type === 'application/zip') {
         uploadPromises.push(this.workflowService.unzipFiles(fileElement));
       } else if (fileElement.type === 'text/xml') {

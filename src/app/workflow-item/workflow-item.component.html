@@ -13,15 +13,24 @@
             <mat-card-subtitle>{{workflow.description}}</mat-card-subtitle>
           </mat-card-header>
         </mat-card>
-        <div [sortablejs]="workflow.operations" [sortablejsOptions]="options" style="min-height: 600px">
-          <div *ngFor="let operation of workflow.operations; let index = index">
-            <app-operation-item
+        <div [sortablejs]="workflow.condOperations" [sortablejsOptions]="options" style="min-height: 600px">
+          <div *ngFor="let  condition of workflow.condOperations; let index = index">
+            <app-condition-item
+              [includedWorkflowSplit]="false"
+              [condition]="condition"
+              (workflowIncluded)="includeWorkflow($event)"
+              (operationEdited)="editOperation($event)"
+              [index]="index"
+              [condValue]="''"
+              [workflow]="workflow"
+            ></app-condition-item>
+            <!--<app-operation-item
               [includedWorkflowSplit]="false"
               [operation]="operation"
               (workflowIncluded)="includeWorkflow($event)"
               (operationEdited)="editOperation($event)"
               [index]="index"
-              [workflow]="workflow"></app-operation-item>
+              [workflow]="workflow"></app-operation-item>-->
           </div>
         </div>
       </div>
@@ -36,12 +45,19 @@
             <mat-card-subtitle>{{includedWorkflow.description}}</mat-card-subtitle>
           </mat-card-header>
         </mat-card>
-        <div *ngFor="let operation of includedWorkflow.operations; let index = index">
-          <app-operation-item
+        <div *ngFor="let condition of includedWorkflow.condOperations; let index = index">
+          <app-condition-item
+            [includedWorkflowSplit]="true"
+            [condition]="condition"
+            [index]="index"
+            [condValue]="''"
+            [workflow]="workflow"
+          ></app-condition-item>
+          <!--<app-operation-item
             [includedWorkflowSplit]="true"
             [operation]="operation"
             [index]="index"
-            [workflow]="workflow"></app-operation-item>
+            [workflow]="workflow"></app-operation-item>-->
         </div>
       </div>
     </div>

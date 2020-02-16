@@ -1,6 +1,7 @@
 import {Tag} from './tag';
 import {Operation} from './operation';
 import {Role} from './role';
+import {Condition} from './condition';
 
 export interface Workflow {
   id: string;
@@ -10,6 +11,7 @@ export interface Workflow {
   configurationPanel?: string;
   tags?: Tag[];
   operations?: Operation[];
+  condOperations?: Condition[];
   roles?: Role[];
   selected: boolean;
   download: boolean;

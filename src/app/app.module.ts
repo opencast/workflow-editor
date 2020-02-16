@@ -33,6 +33,8 @@ import {AngularSplitModule} from 'angular-split';
 import { EditOperationComponent } from './edit-operation/edit-operation.component';
 import { EditWorkflowComponent } from './edit-workflow/edit-workflow.component';
 import {MonacoEditorModule} from 'ngx-monaco-editor';
+import { ConditionItemComponent } from './condition-item/condition-item.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -46,13 +48,15 @@ import {MonacoEditorModule} from 'ngx-monaco-editor';
     DefaultOperationListComponent,
     SelectWorkflowsDialogComponent,
     EditOperationComponent,
-    EditWorkflowComponent
+    EditWorkflowComponent,
+    ConditionItemComponent
   ],
   imports: [
     BrowserModule,
     AngularSplitModule.forRoot(),
     MonacoEditorModule.forRoot(),
     BrowserAnimationsModule,
+    DragDropModule,
     MatToolbarModule,
     MatDialogModule,
     MatFormFieldModule,
