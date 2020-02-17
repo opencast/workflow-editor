@@ -40,23 +40,23 @@ export class ConditionItemComponent implements OnInit {
         console.log(event.to.getAttribute('data-cond'));*/
       },
       onRemove: (event: SortableEvent) => {
-        console.log('remove', this.condition, this.index);
         if (this.condition.left.length === 0 && this.condition.right.length === 0) {
           this.workflowService.updateWorkflow(this.workflow);
         }
       },
       onAdd: (event: SortableEvent) => {
         console.log('add', event);
-
         if (event.from.className === 'default-operation-list') {
-          if (event.to.className === 'condition-right') {
+          if (event.to.className === 'cond-sortable-right ng-star-inserted') {
             const clonedCondition: Condition = _.cloneDeep(
               this.workflowService.getCondFromCondOps(event.newIndex, this.condition.right));
             this.workflowService.removeCondFromCondOps(event.newIndex, this.condition.right);
+            clonedCondition.rightParent = this.condition;
             this.workflowService.addCondToCondOps(clonedCondition, event.newIndex, this.condition.right);
-          } else if (event.target.className === 'condition-left') {
+          } else if (event.target.className === 'cond-sortable-left ng-star-inserted') {
             const clonedCondition: Condition = _.cloneDeep(this.workflowService.getCondFromCondOps(event.newIndex, this.condition.left));
             this.workflowService.removeCondFromCondOps(event.newIndex, this.condition.left);
+            clonedCondition.leftParent = this.condition;
             this.workflowService.addCondToCondOps(clonedCondition, event.newIndex, this.condition.left);
           }
         }
@@ -69,6 +69,13 @@ export class ConditionItemComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  removeOperation(removedOpOnCond: Condition) {
+    console.log("hier", removedOpOnCond);
+    if (removedOpOnCond.left.length === 0 && removedOpOnCond.right.length === 0) {
+      this.workflowService.updateWorkflow(this.workflow);
+    }
   }
 
   includeWorkflow(operation: Operation) {

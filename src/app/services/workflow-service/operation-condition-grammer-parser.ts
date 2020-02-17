@@ -97,17 +97,6 @@ const grammar: Grammar = {
           }
         }
     },
-    {"name": "VALUE", "symbols": [{"literal":"("}, "_", "EXPRESSION", "_", {"literal":")"}], "postprocess":
-        (d) => {
-          return {
-            type:   'NESTED',
-            d:      d[2],
-            ...(typeof (d[2].p) !== 'undefined') && {p: d[2].p},
-            //bf:     d[2].bf,
-            v:      d[0] + ((d[1])? d[1]: "") + d[2].v + ((d[3])? d[3]: "") + d[4]
-          }
-        }
-    },
     {"name": "VALUE", "symbols": ["RELATION"], "postprocess":
         (d) => {
           return {
@@ -126,6 +115,17 @@ const grammar: Grammar = {
             d:      d[0],
             //bf:     d[0].bf,
             v:      d[0].v
+          }
+        }
+    },
+    {"name": "VALUE", "symbols": [{"literal":"("}, "_", "EXPRESSION", "_", {"literal":")"}], "postprocess":
+        (d) => {
+          return {
+            type:   'NESTED',
+            dp:      d[2].d,
+            ...(typeof (d[2].p) !== 'undefined') && {p: d[2].p},
+            //bf:     d[2].bf,
+            v:      d[0] + ((d[1])? d[1]: "") + d[2].v + ((d[3])? d[3]: "") + d[4]
           }
         }
     },

@@ -26,6 +26,10 @@ export class DownloadWorkflowsDialogComponent {
     this.dialogRef.disableClose = true;
     this.downloadDisabled = true;
 
+    this.workflows.forEach((workflow) => {
+      this.workflowService.updateWorkflow(workflow);
+    });
+
     this.workflowService.downloadWorkflows().catch((e) => {
       console.log(e);
       // todo: Promise Exception

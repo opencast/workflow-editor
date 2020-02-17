@@ -35,6 +35,8 @@ import { EditWorkflowComponent } from './edit-workflow/edit-workflow.component';
 import {MonacoEditorModule} from 'ngx-monaco-editor';
 import { ConditionItemComponent } from './condition-item/condition-item.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {APPLICATION_VALIDATORS} from './directives/validators.directive';
+import { ShowErrorComponent } from './show-error/show-error.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     SelectWorkflowsDialogComponent,
     EditOperationComponent,
     EditWorkflowComponent,
-    ConditionItemComponent
+    ConditionItemComponent,
+    APPLICATION_VALIDATORS,
+    ShowErrorComponent
   ],
   imports: [
     BrowserModule,

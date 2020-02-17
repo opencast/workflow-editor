@@ -35,20 +35,7 @@ export class WorkflowService {
   constructor() {
     const newWorkflow: Workflow = {
       id: 'new-workflow',
-      operations: [{
-        id: 'new-operation3',
-        if: '${a}',
-        selected: false
-      }, {
-        id: 'new-operation4',
-        if: 'NOT(${a})',
-        selected: false
-      }, {
-        id: 'new-operation5',
-        if: '${a} AND ${b}',
-        selected: false
-      }
-      ],
+      operations: [],
       download: true,
       selected: true
     };
@@ -114,6 +101,7 @@ export class WorkflowService {
     const updatedConditions: Condition[] = [];
 
     workflow.operations.forEach((operation) => {
+      operation.ifError = '';
       const parser: Parser = new Parser(
         Grammar.fromCompiled(grammar),
         { keepHistory: true }
@@ -122,10 +110,9 @@ export class WorkflowService {
         parser.feed(operation.if);
       } catch (err) {
         operation.ifError = err.message;
-        updatedConditions.push({value: operation.if, left: [{value: '', left: [operation], right: []}], right: []});
-        console.log(operation);
+        updatedConditions.push({value: operation.if, left: [{value: '', left: [operation], right: []}], right: [], parent: workflow});
       }
-      if (operation.if !== '' && typeof operation.ifError === 'undefined') {
+      if (operation.if !== '' && operation.ifError === '') {
 
 
         const mergedCondOp = {value: false};
@@ -139,7 +126,7 @@ export class WorkflowService {
           this.findPositionInCondTree(newCondOperation, parser.results[0], operation);
         }
 
-        let lastOpCondition: Condition = {value: '', left: [], right: []};
+        let lastOpCondition: Condition = {value: '', left: [], right: [], parent: workflow};
         if (updatedConditions.length > 0) {
           lastOpCondition = updatedConditions[updatedConditions.length - 1];
           this.mergeCondOperations(newCondOperation, lastOpCondition, mergedCondOp);
@@ -149,7 +136,7 @@ export class WorkflowService {
           updatedConditions.push(newCondOperation);
         }
       } else if (operation.if === '' ) {
-        updatedConditions.push({value: '', left: [operation], right: []});
+        updatedConditions.push({value: '', left: [operation], right: [], parent: workflow});
       }
     });
     workflow.condOperations = updatedConditions;
@@ -182,6 +169,7 @@ export class WorkflowService {
             const lastLeftCond = this.instanceOfCondition(lastLeftCondOp);
             if (newLeftCond !== null && lastLeftCond !== null) {
               if (newLeftCond.value !== '' && newLeftCond.value === lastLeftCond.value) {
+                addNewLeftCond = false;
                 this.mergeCondOperations(newLeftCond, lastLeftCond, mergedCondOp);
               } else {
                 addNewLeftCond = true;
@@ -202,6 +190,7 @@ export class WorkflowService {
             const lastRightCond = this.instanceOfCondition(lastRightCondOp);
             if (newRightCond !== null && lastRightCond !== null) {
               if (newRightCond.value !== '' && newRightCond.value === lastRightCond.value) {
+                addNewRightCond = false;
                 this.mergeCondOperations(newRightCond, lastRightCond, mergedCondOp);
               } else {
                 addNewRightCond = true;
@@ -250,8 +239,8 @@ export class WorkflowService {
     return newOpCondition;
   }
 
-  private findPositionInCondTree(lastOpCondition: Condition, parserResults, operation): (Operation | Condition)[] {
-    let newCondPos: (Operation | Condition)[] = [];
+  private findPositionInCondTree(lastOpCondition: Condition, parserResults, operation): {pos: string, value: Condition} {
+    let newCondPos: {pos: string, value: Condition} = {pos: '', value: null};
     if (parserResults.type !== 'NOT') {
       if (parserResults.type === 'AND') {
 
@@ -280,15 +269,21 @@ export class WorkflowService {
         });
       } else {
         if (lastOpCondition.value === parserResults.v) {
-          newCondPos = lastOpCondition.left;
+          newCondPos.value = lastOpCondition;
+          newCondPos.pos = 'left';
         }
       }
     } else {
       if (lastOpCondition.value === parserResults.dn.v) {
-        newCondPos = lastOpCondition.right;
+        newCondPos.value = lastOpCondition;
+        newCondPos.pos = 'right';
       }
     }
-    newCondPos.push({value: '', left: [operation], right: []});
+    if (newCondPos.pos === 'left') {
+      newCondPos.value.left.push({value: '', left: [operation], right: [], leftParent: newCondPos.value});
+    } else if (newCondPos.pos === 'right') {
+      newCondPos.value.right.push({value: '', left: [operation], right: [], rightParent: newCondPos.value});
+    }
     return newCondPos;
 }
 
@@ -298,7 +293,6 @@ export class WorkflowService {
   }
 
   private updateOperationsOnConditions(workflow: Workflow) {
-    console.log('updatedWorkflow', workflow);
     let updatedOperations: Operation[] = [];
     workflow.condOperations.forEach((condOp) => {
       updatedOperations = updatedOperations.concat(this.getUpdatedOperations(condOp));
@@ -372,16 +366,17 @@ export class WorkflowService {
     condOps.splice(index, 1);
   }
 
-  addOperation(operation: Operation, index: number, workflow: Workflow) {
-    workflow.operations.splice(index, 0, operation);
+  addOperation(operation: Condition, index: number, workflow: Workflow) {
+    operation.parent = workflow;
+    workflow.condOperations.splice(index, 0, operation);
   }
 
-  getOperation(index: number, workflow: Workflow): Operation {
-    return workflow.operations[index];
+  getOperation(index: number, workflow: Workflow): Condition {
+    return workflow.condOperations[index];
   }
 
   removeOperation(index: number, workflow: Workflow) {
-    workflow.operations.splice(index, 1);
+    workflow.condOperations.splice(index, 1);
   }
 
   getWorkflowById(id: string): Workflow {

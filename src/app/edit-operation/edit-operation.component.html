@@ -11,11 +11,12 @@
     </p>
     <p>
       <mat-form-field class="op-form-field" appearance="standard">
-        <mat-label for="operationId">If-Condition:</mat-label>
+        <mat-label for="operationIf">If-Condition:</mat-label>
         <textarea matInput class="form-control"
                   [(ngModel)]="operation.if"
                   name="operationIfCondition"
-                  id="operationIfCondition"></textarea>
+                  id="operationIfCondition" appOpIfConditionValidator (blur)="updateWorkflow()"></textarea>
+        <app-show-error path="operationIfCondition"></app-show-error>
       </mat-form-field>
     </p>
     <p>

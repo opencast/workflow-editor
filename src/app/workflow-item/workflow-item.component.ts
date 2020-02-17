@@ -5,6 +5,7 @@ import {WorkflowService} from '../services/workflow-service/workflow.service';
 import {Operation} from '../models/operation';
 import * as _ from 'lodash';
 import {MatSidenav, MatTab, MatTabGroup} from '@angular/material';
+import {Condition} from '../models/condition';
 
 @Component({
   selector: 'app-workflow-item',
@@ -29,7 +30,7 @@ export class WorkflowItemComponent implements OnInit {
   constructor(private workflowService: WorkflowService) {
     this.options = {
       onAdd: (event: SortableEvent) => {
-        const clonedOperation: Operation = _.cloneDeep(this.workflowService.getOperation(event.newIndex, this.workflow));
+        const clonedOperation: Condition = _.cloneDeep(this.workflowService.getOperation(event.newIndex, this.workflow));
         this.workflowService.removeOperation(event.newIndex, this.workflow);
         this.workflowService.addOperation(clonedOperation, event.newIndex, this.workflow);
       },
@@ -49,6 +50,7 @@ export class WorkflowItemComponent implements OnInit {
   }
 
   editOperation(editedOperation: Operation) {
+    this.workflowService.updateWorkflow(this.workflow);
     this.closeEditWorkflow();
     this.workflow.operations
       .map((op) => op.selected = false);

@@ -1,4 +1,4 @@
-<div class="container-item operation-item" [ngClass]="{selected : operation.selected}">
+<div class="container-item operation-item" [ngClass]="{selected : operation.selected && !includedWorkflowSplit}">
   <div class="header">
     <div class="action-bar" *ngIf="!includedWorkflowSplit">
       <button mat-icon-button disableRipple class="edit-operation" (click)="editOp(operation)" *ngIf="operation.ifError">

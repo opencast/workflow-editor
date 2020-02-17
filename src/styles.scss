@@ -12,3 +12,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .content, .mat-tab-body-wrapper{
   flex-grow: 1;
 }
+.error-msg {
+  white-space: pre;
+  color: red;
+  font-size: 12px;
+  max-height: 100px;
+  overflow: scroll;
+}
