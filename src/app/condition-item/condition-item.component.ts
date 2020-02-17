@@ -76,6 +76,7 @@ export class ConditionItemComponent implements OnInit {
     if (removedOpOnCond.left.length === 0 && removedOpOnCond.right.length === 0) {
       this.workflowService.updateWorkflow(this.workflow);
     }
+    this.editOperation(null);
   }
 
   includeWorkflow(operation: Operation) {

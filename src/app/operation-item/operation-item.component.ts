@@ -4,6 +4,7 @@ import * as Sortable from 'sortablejs';
 import {WorkflowService} from '../services/workflow-service/workflow.service';
 import {Workflow} from '../models/workflow';
 import {Condition} from '../models/condition';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-operation-item',
@@ -32,20 +33,24 @@ export class OperationItemComponent implements OnInit, OnChanges {
     this.operation.if = this.condValue;
   }
 
-  removeOperation(index: number, workflow: Workflow) {
-    console.log(this.condOperation);
-    if (this.operation.selected) {
-      this.operation.selected = false;
-    }
-
+  removeOperation(index: number) {
     if (typeof this.condOperation.leftParent !== 'undefined') {
       this.condOperation.leftParent.left.splice(index, 1);
+      if (this.operation.selected) {
+        this.operation.selected = false;
+      }
       this.operationRemoved.emit(this.condOperation.leftParent);
     } else if (typeof this.condOperation.rightParent !== 'undefined') {
       this.condOperation.rightParent.right.splice(index, 1);
+      if (this.operation.selected) {
+        this.operation.selected = false;
+      }
       this.operationRemoved.emit(this.condOperation.rightParent);
     } else if (typeof this.condOperation.parent !== 'undefined') {
       this.condOperation.parent.condOperations.splice(index, 1);
+      if (this.operation.selected) {
+        this.editOp(null);
+      }
     }
   }
 
@@ -57,7 +62,17 @@ export class OperationItemComponent implements OnInit, OnChanges {
     this.workflowIncluded.emit(operation);
   }
 
-  duplicateOp(operation: Operation) {
-    // todo
+  duplicateOp(index: number) {
+    const clonedCondition: Condition = _.cloneDeep(this.condOperation);
+    clonedCondition.left[0].selected = false;
+
+    if (typeof this.condOperation.leftParent !== 'undefined') {
+      this.workflowService.addCondToCondOps(clonedCondition, index + 1, this.condOperation.leftParent.left);
+    } else if (typeof this.condOperation.rightParent !== 'undefined') {
+      this.workflowService.addCondToCondOps(clonedCondition, index + 1, this.condOperation.rightParent.right);
+
+    } else if (typeof this.condOperation.parent !== 'undefined') {
+      this.workflowService.addCondToCondOps(clonedCondition, index + 1, this.condOperation.parent.condOperations);
+    }
   }
 }

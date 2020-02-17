@@ -32,4 +32,8 @@ export class AppComponent {
   openSelectDialog(): void {
     this.dialog.open(SelectWorkflowsDialogComponent, { });
   }
+
+  addNewWorkflow(): void {
+    this.workflowService.initNewWorkflow();
+  }
 }

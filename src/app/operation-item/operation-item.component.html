@@ -7,13 +7,13 @@
       <button mat-icon-button disableRipple class="edit-operation" (click)="editOp(operation)">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button disableRipple class="duplicate-operation" (click)="duplicateOp(operation)">
+      <button mat-icon-button disableRipple class="duplicate-operation" (click)="duplicateOp(index)">
         <mat-icon>file_copy</mat-icon>
       </button>
       <button *ngIf="operation.id === 'include'" mat-icon-button disableRipple class="include-operation" (click)="includeOp(operation)">
         <mat-icon>open_in_new</mat-icon>
       </button>
-      <button mat-icon-button color="warn" disableRipple class="delete-operation" (click)="removeOperation(index, workflow)">
+      <button mat-icon-button color="warn" disableRipple class="delete-operation" (click)="removeOperation(index)">
         <mat-icon>delete_forever</mat-icon>
       </button>
     </div>

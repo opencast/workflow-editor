@@ -33,14 +33,7 @@ export class WorkflowService {
   defaultOperations: Condition[] = [];
 
   constructor() {
-    const newWorkflow: Workflow = {
-      id: 'new-workflow',
-      operations: [],
-      download: true,
-      selected: true
-    };
-    this.workflows.push(newWorkflow);
-    this.updateConditionsOnOperations(newWorkflow);
+    this.initNewWorkflow();
     this.initDefaultOperations(defaultOperationParamList);
   }
 
@@ -315,6 +308,17 @@ export class WorkflowService {
         }
       });
     return updatedOperations;
+  }
+
+  initNewWorkflow() {
+    const newWorkflow: Workflow = {
+      id: 'new-workflow',
+      operations: [],
+      download: true,
+      selected: true
+    };
+    this.workflows.push(newWorkflow);
+    this.updateConditionsOnOperations(newWorkflow);
   }
 
   private initDefaultOperations(paramList: DefaultOperationParamList[]) {
