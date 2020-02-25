@@ -3,17 +3,19 @@
     <div class="workflow-outer-wrapper">
       <div class="workflow-inner-wrapper">
         <mat-card>
-          <div class="action-bar">
-            <button mat-icon-button disableRipple class="edit-operation" (click)="editWorkflow()">
-              <mat-icon>edit</mat-icon>
-            </button>
-          </div>
           <mat-card-header>
-            <mat-card-title class="workflow-title">{{workflow.id}}</mat-card-title>
+            <mat-card-title class="workflow-title">
+              <div class="action-bar">
+                <button mat-icon-button disableRipple class="edit-operation" (click)="editWorkflow()">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </div>
+              <div class="workflow-id">{{workflow.id}}</div>
+            </mat-card-title>
             <mat-card-subtitle class="workflow-subtitle">{{workflow.description}}</mat-card-subtitle>
           </mat-card-header>
         </mat-card>
-        <div [sortablejs]="workflow.condOperations" [sortablejsOptions]="options" style="min-height: 600px">
+        <div [sortablejs]="workflow.condOperations" [sortablejsOptions]="options" style="min-height: calc(100vh - 160px);">
           <div *ngFor="let  condition of workflow.condOperations; let index = index">
             <app-condition-item
               [includedWorkflowSplit]="false"
@@ -34,13 +36,15 @@
           </div>
         </div>
         <mat-card>
-          <div class="action-bar">
-            <button mat-icon-button disableRipple class="edit-operation" (click)="editWorkflow()">
-              <mat-icon>edit</mat-icon>
-            </button>
-          </div>
           <mat-card-header>
-            <mat-card-title class="workflow-title">{{workflow.id}}</mat-card-title>
+            <mat-card-title class="workflow-title">
+              <div class="action-bar">
+                <button mat-icon-button disableRipple class="edit-operation" (click)="editWorkflow()">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </div>
+              <div class="workflow-id">{{workflow.id}}</div>
+            </mat-card-title>
             <mat-card-subtitle class="workflow-subtitle">{{workflow.description}}</mat-card-subtitle>
           </mat-card-header>
         </mat-card>
@@ -70,12 +74,6 @@
             [index]="index"
             [workflow]="workflow"></app-operation-item>-->
         </div>
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title class="workflow-title">{{includedWorkflow.id}}</mat-card-title>
-            <mat-card-subtitle class="workflow-subtitle">{{includedWorkflow.description}}</mat-card-subtitle>
-          </mat-card-header>
-        </mat-card>
       </div>
     </div>
     <button mat-mini-fab disableRipple color="accent" class="close-included-workflow" (click)="closeIncludedWorkflow()">

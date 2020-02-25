@@ -37,6 +37,8 @@ import { ConditionItemComponent } from './condition-item/condition-item.componen
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {APPLICATION_VALIDATORS} from './directives/validators.directive';
 import { ShowErrorComponent } from './show-error/show-error.component';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
   declarations: [
@@ -53,10 +55,12 @@ import { ShowErrorComponent } from './show-error/show-error.component';
     EditWorkflowComponent,
     ConditionItemComponent,
     APPLICATION_VALIDATORS,
-    ShowErrorComponent
+    ShowErrorComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
+    Ng2SearchPipeModule,
     AngularSplitModule.forRoot(),
     MonacoEditorModule.forRoot(),
     BrowserAnimationsModule,

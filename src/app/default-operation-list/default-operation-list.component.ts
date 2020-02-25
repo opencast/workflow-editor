@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Operation} from '../models/operation';
 import { Options } from 'sortablejs';
 import {WorkflowService} from '../services/workflow-service/workflow.service';
@@ -12,6 +12,8 @@ import {Condition} from '../models/condition';
 export class DefaultOperationListComponent implements OnInit {
 
   defaultOperations: Condition[] = [];
+  searchText;
+  newDefaultOperations: Condition[] = [];
 
   defaultOpsOptions: Options = {
     group: {
@@ -25,9 +27,19 @@ export class DefaultOperationListComponent implements OnInit {
 
   constructor(private workflowService: WorkflowService) {
     this.defaultOperations = this.workflowService.defaultOperations;
+
+    const newDefaultOperation: Condition = {
+      value: '',
+      left: [{
+        id: 'new-operation',
+        if: '',
+        selected: false
+      }],
+      right: []
+    };
+    this.newDefaultOperations = [newDefaultOperation];
   }
 
   ngOnInit() {
   }
-
 }

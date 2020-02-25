@@ -346,6 +346,8 @@ export class WorkflowService {
         }],
         right: []
       });
+
+      this.defaultOperations = _.sortBy(this.defaultOperations, [(op) => {return (op.left[0] as Operation).id}]);
     });
   }
 

@@ -27,3 +27,29 @@
 .default-operation-list-wrapper {
   padding: 0 45px;
 }
+
+.default-operation-list-wrapper {
+  overflow-y: scroll !important;
+  height: calc(100vh - 300px);
+
+  .container-item {
+    //margin: 0 auto 30px auto;
+    background-color: white;
+  }
+}
+
+.default-operation-list-header {
+  width: 100%;
+  height: 200px;
+  padding: 0 35px;
+  border-bottom: 1px solid black;
+  box-sizing: border-box;
+
+  .search-form-field {
+    width: 100%;
+    display: block;
+    .form-control::placeholder {
+      font-family: 'Material Icons';
+    }
+  }
+}

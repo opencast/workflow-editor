@@ -46,7 +46,7 @@ export class ConditionItemComponent implements OnInit {
       },
       onAdd: (event: SortableEvent) => {
         console.log('add', event);
-        if (event.from.className === 'default-operation-list') {
+        if (event.from.className === 'default-operation-list' || event.from.className === 'new-default-operation') {
           if (event.to.className === 'cond-sortable-right ng-star-inserted') {
             const clonedCondition: Condition = _.cloneDeep(
               this.workflowService.getCondFromCondOps(event.newIndex, this.condition.right));

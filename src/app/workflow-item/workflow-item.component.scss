@@ -12,7 +12,7 @@
   display: inline-block;
   min-width: 100%;
   box-sizing: border-box;
-  padding: 10px 20px 50px 50px;
+  padding: 10px 20px 10px 50px;
 }
 
 .included-workflow-split,
@@ -78,4 +78,14 @@
   .material-icons {
     font-size: 20px;
   }
+}
+
+.workflow-inner-wrapper mat-card.mat-card {
+    padding: 5px;
+    .mat-card-header-text {
+      margin: 0;
+    }
+    .action-bar, .workflow-id {
+      float: right;
+    }
 }

@@ -64,7 +64,7 @@ export class OperationItemComponent implements OnInit, OnChanges {
 
   duplicateOp(index: number) {
     const clonedCondition: Condition = _.cloneDeep(this.condOperation);
-    clonedCondition.left[0].selected = false;
+    (clonedCondition.left[0] as Operation).selected = false;
 
     if (typeof this.condOperation.leftParent !== 'undefined') {
       this.workflowService.addCondToCondOps(clonedCondition, index + 1, this.condOperation.leftParent.left);

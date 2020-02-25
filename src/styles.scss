@@ -17,3 +17,32 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   max-height: 100px;
   overflow: scroll;
 }
+
+mat-sidenav.default-operation-list.mat-drawer, mat-sidenav.default-operation-list.mat-drawer .mat-drawer-inner-container {
+  overflow: hidden !important;
+}
+
+.main-workflow-split, .included-workflow-split {
+  .workflow-inner-wrapper {
+    .mat-card-header-text {
+      margin: 0;
+    }
+    .mat-card-actions, .mat-card-content, .mat-card-subtitle, .mat-card-header .mat-card-title {
+      margin-bottom: 0;
+    }
+    .mat-card-header-text, .workflow-title {
+      width: 100%;
+      &::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+    }
+    .mat-card-header-text .workflow-id {
+      padding: 5px 0;
+      width: 80%;
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+}
