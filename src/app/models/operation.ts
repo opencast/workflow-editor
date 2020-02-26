@@ -5,7 +5,7 @@ export interface Operation {
   if: string;
   description?: string;
   retryStrategy?: string;
-  maxAttemps?: number;
+  maxAttempts?: number;
   failOnError?: string;
   exceptionHandlerWorkflow?: string;
   configurations?: Configuration[];

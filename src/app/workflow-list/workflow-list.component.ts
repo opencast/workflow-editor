@@ -17,7 +17,7 @@ export class WorkflowListComponent implements OnInit {
   public tabNodes: QueryList<MatTab>;
   @ViewChild(MatSidenav, {read: MatSidenav, static: false})
   public sidenav: MatSidenav;
-  private operationsSidenavOpened: any = true;
+  public operationsSidenavOpened: any = true;
 
   workflows: Workflow[];
 

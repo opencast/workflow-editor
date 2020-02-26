@@ -49,7 +49,7 @@ export class WorkflowService {
       if: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr.if, ''),
       description: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr.description),
       retryStrategy: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr['retry-strategy']),
-      maxAttemps: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr['max-attempts']),
+      maxAttempts: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr['max-attempts']),
       failOnError: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr['fail-on-error']),
       exceptionHandlerWorkflow: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr['exception-handler-workflow']),
       selected: false
@@ -508,7 +508,7 @@ export class WorkflowService {
         ...((operation.if) !== '') && {if: operation.if},
         ...(typeof (operation.description) !== 'undefined') && {description: operation.description},
         ...(typeof (operation.retryStrategy) !== 'undefined') && {'retry-strategy': operation.retryStrategy},
-        ...(typeof (operation.maxAttemps) !== 'undefined') && {'max-attempts': operation.maxAttemps},
+        ...(typeof (operation.maxAttempts) !== 'undefined') && {'max-attempts': operation.maxAttempts},
         ...(typeof (operation.failOnError) !== 'undefined') && {'fail-on-error': operation.failOnError},
         ...(typeof (operation.exceptionHandlerWorkflow) !== 'undefined') &&
         {'exception-handler-workflow': operation.exceptionHandlerWorkflow}
