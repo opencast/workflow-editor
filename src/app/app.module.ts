@@ -12,16 +12,17 @@ import { UploadWorkflowsDialogComponent } from './upload-workflows-dialog/upload
 import { DragDropUploadDirective } from './drag-drop-upload.directive';
 import { WorkflowListComponent } from './workflow-list/workflow-list.component';
 import { DownloadWorkflowsDialogComponent } from './download-workflows-dialog/download-workflows-dialog.component';
-import {
-  MatAutocompleteModule,
-  MatBadgeModule,
-  MatButtonToggleModule,
-  MatCardModule, MatChipsModule, MatFormFieldModule,
-  MatIconModule, MatInputModule,
-  MatListModule,
-  MatSlideToggleModule,
-  MatTabsModule
-} from '@angular/material';
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
 import { WorkflowItemComponent } from './workflow-item/workflow-item.component';
 import { OperationItemComponent } from './operation-item/operation-item.component';
 import {SortablejsModule} from 'ngx-sortablejs';

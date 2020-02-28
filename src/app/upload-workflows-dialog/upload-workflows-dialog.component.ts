@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { WorkflowService } from '../services/workflow-service/workflow.service';
-import {MatDialog} from '@angular/material';
-import {MatDialogRef} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-upload-workflows-dialog',

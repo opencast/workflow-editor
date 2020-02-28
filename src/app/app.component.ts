@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { UploadWorkflowsDialogComponent } from './upload-workflows-dialog/upload-workflows-dialog.component';
 import {WorkflowService} from './services/workflow-service/workflow.service';
 import {DownloadWorkflowsDialogComponent} from './download-workflows-dialog/download-workflows-dialog.component';

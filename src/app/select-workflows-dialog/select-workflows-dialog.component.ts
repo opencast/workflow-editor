@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Workflow} from '../models/workflow';
-import {MatDialog, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {WorkflowService} from '../services/workflow-service/workflow.service';
 
 @Component({
