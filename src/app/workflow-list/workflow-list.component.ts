@@ -12,11 +12,11 @@ import {MatTab, MatTabGroup} from '@angular/material/tabs';
 
 export class WorkflowListComponent implements OnInit {
 
-  @ViewChild(MatTabGroup, {read: MatTabGroup, static: false})
+  @ViewChild(MatTabGroup, { read: MatTabGroup })
   public tabGroup: MatTabGroup;
   @ViewChildren(MatTab, {read: MatTab})
   public tabNodes: QueryList<MatTab>;
-  @ViewChild(MatSidenav, {read: MatSidenav, static: false})
+  @ViewChild(MatSidenav, { read: MatSidenav })
   public sidenav: MatSidenav;
   public operationsSidenavOpened: any = true;
 

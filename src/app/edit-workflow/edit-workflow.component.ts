@@ -38,9 +38,9 @@ export class EditWorkflowComponent implements OnInit {
 
   workflow: Workflow;
 
-  @ViewChild('tagInput', {read: ElementRef, static: false}) tagInput: ElementRef<HTMLInputElement>;
-  @ViewChild('roleInput', {read: ElementRef, static: false}) roleInput: ElementRef<HTMLInputElement>;
-  @ViewChild('tagAuto', {read: MatAutocomplete, static: false}) matAutocomplete: MatAutocomplete;
+  @ViewChild('tagInput', { read: ElementRef }) tagInput: ElementRef<HTMLInputElement>;
+  @ViewChild('roleInput', { read: ElementRef }) roleInput: ElementRef<HTMLInputElement>;
+  @ViewChild('tagAuto', { read: MatAutocomplete }) matAutocomplete: MatAutocomplete;
 
   constructor() {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
