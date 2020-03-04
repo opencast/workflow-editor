@@ -4,7 +4,8 @@ import {Options, SortableEvent} from 'sortablejs';
 import {WorkflowService} from '../services/workflow-service/workflow.service';
 import {Operation} from '../models/operation';
 import * as _ from 'lodash';
-import {MatSidenav, MatTab, MatTabGroup} from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
+import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import {Condition} from '../models/condition';
 
 @Component({
