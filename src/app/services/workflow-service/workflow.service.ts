@@ -45,18 +45,17 @@ export class WorkflowService {
 
   private static parse2Operation(jsXmlOperation): Operation {
     const newOperation: Operation = {
-      id: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr.id),
-      if: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr.if, ''),
-      description: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr.description),
-      retryStrategy: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr['retry-strategy']),
-      maxAttempts: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr['max-attempts']),
-      failOnError: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr['fail-on-error']),
-      exceptionHandlerWorkflow: WorkflowService.getSafePropertyHelper(() => jsXmlOperation.attr['exception-handler-workflow']),
+      id: jsXmlOperation?.attr?.id,
+      if: jsXmlOperation?.attr?.if,
+      description: jsXmlOperation?.attr?.description,
+      retryStrategy: jsXmlOperation?.attr['retry-strategy'],
+      maxAttempts: jsXmlOperation?.attr['max-attempts'],
+      failOnError: jsXmlOperation?.attr['fail-on-error'],
+      exceptionHandlerWorkflow: jsXmlOperation?.attr['exception-handler-workflow'],
       selected: false
     };
 
-    const configurations = WorkflowService.getCollectionOfJsElements(
-      WorkflowService.getSafePropertyHelper(() => jsXmlOperation.configurations.configuration, []));
+    const configurations = WorkflowService.getCollectionOfJsElements(jsXmlOperation?.configurations?.configuration);
     configurations.forEach((configuration) => {
       if (newOperation.configurations === undefined) { newOperation.configurations = []; }
       newOperation.configurations.push(WorkflowService.parse2Configuration(configuration));
@@ -67,7 +66,7 @@ export class WorkflowService {
 
   private static parse2Configuration(jsXmlConfiguration): Configuration {
     return {
-      key: WorkflowService.getSafePropertyHelper(() => jsXmlConfiguration.attr.key),
+      key: jsXmlConfiguration?.attr?.key,
       value: jsXmlConfiguration['#text']
     };
   }
@@ -76,14 +75,6 @@ export class WorkflowService {
     return {
       value: jsXmlRole
     };
-  }
-
-  static getSafePropertyHelper(fn, defaultVal?) {
-    try {
-      return (fn() !== undefined) ? fn() : defaultVal;
-    } catch (e) {
-      return defaultVal;
-    }
   }
 
   private static getCollectionOfJsElements(collection: object[] | object): object[] {
@@ -347,7 +338,9 @@ export class WorkflowService {
         right: []
       });
 
-      this.defaultOperations = _.sortBy(this.defaultOperations, [(op) => {return (op.left[0] as Operation).id}]);
+      this.defaultOperations = _.sortBy(
+        this.defaultOperations,
+        [(op) => (op.left[0] as Operation).id]);
     });
   }
 
@@ -450,31 +443,28 @@ export class WorkflowService {
   parseXml2Workflow(xmlWorkflow: string) {
     const jsXmlWorkflow = fastxmljs.parse(xmlWorkflow, WorkflowService.parserOptions).definition;
     const newWorkflow: Workflow = {
-      id: WorkflowService.getSafePropertyHelper(() => jsXmlWorkflow.id),
-      title: WorkflowService.getSafePropertyHelper(() => jsXmlWorkflow.title),
-      description: WorkflowService.getSafePropertyHelper(() => jsXmlWorkflow.description),
-      displayOrder: WorkflowService.getSafePropertyHelper(() => jsXmlWorkflow.displayOrder),
-      configurationPanel: WorkflowService.getSafePropertyHelper(() => jsXmlWorkflow.configuration_panel.__cdata),
+      id: jsXmlWorkflow?.id,
+      title: jsXmlWorkflow?.title,
+      description: jsXmlWorkflow?.description,
+      displayOrder: jsXmlWorkflow?.displayOrder,
+      configurationPanel: jsXmlWorkflow?.configuration_panel?.__cdata,
       selected: true,
       download: true
     };
 
-    const tags = WorkflowService.getCollectionOfJsElements(
-      WorkflowService.getSafePropertyHelper(() => jsXmlWorkflow.tags.tag, []));
+    const tags = WorkflowService.getCollectionOfJsElements(jsXmlWorkflow?.tags?.tag);
     tags.forEach(tag => {
       if (newWorkflow.tags === undefined) { newWorkflow.tags = []; }
       newWorkflow.tags.push(WorkflowService.parse2Tag(tag));
     });
 
-    const operations = WorkflowService.getCollectionOfJsElements(
-      WorkflowService.getSafePropertyHelper(() => jsXmlWorkflow.operations.operation, []));
+    const operations = WorkflowService.getCollectionOfJsElements(jsXmlWorkflow?.operations?.operation);
     operations.forEach((operation, index) => {
       if (newWorkflow.operations === undefined) { newWorkflow.operations = []; }
       newWorkflow.operations.push(WorkflowService.parse2Operation(operation));
     });
 
-    const roles = WorkflowService.getCollectionOfJsElements(
-      WorkflowService.getSafePropertyHelper(() => jsXmlWorkflow.roles.role, []));
+    const roles = WorkflowService.getCollectionOfJsElements(jsXmlWorkflow?.roles?.role);
     roles.forEach(role => {
       if (newWorkflow.roles === undefined) { newWorkflow.roles = []; }
       newWorkflow.roles.push(WorkflowService.parse2Role(role));

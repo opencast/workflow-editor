@@ -31,12 +31,13 @@ export class WorkflowItemComponent implements OnInit {
   constructor(private workflowService: WorkflowService) {
     this.options = {
       onAdd: (event: SortableEvent) => {
+        console.log('add');
         const clonedOperation: Condition = _.cloneDeep(this.workflowService.getOperation(event.newIndex, this.workflow));
         this.workflowService.removeOperation(event.newIndex, this.workflow);
         this.workflowService.addOperation(clonedOperation, event.newIndex, this.workflow);
       },
       setData: (dataTransfer) => {
-        var img = new Image();
+        const img = new Image();
         dataTransfer.setDragImage(img, 0, 0);
       }
     };
