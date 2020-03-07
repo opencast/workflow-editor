@@ -109,34 +109,12 @@
     <div *ngIf="condOperation.left !== undefined && condOperation.value === ''">
       <ng-container *ngTemplateOutlet="tmplOperation, context:{condition: condOperation, condValue: condValue + condition.value, condIndex: condIndex}"></ng-container>
     </div>
-    <div *ngIf="condOperation.left !== undefined && condOperation.value !== ''">
-      <app-condition-item
-        [includedWorkflowSplit]="false"
-        [condition]="condOperation"
-        (workflowIncluded)="includeWorkflow($event)"
-        (operationEdited)="editOperation($event)"
-        [index]="condIndex"
-        [condValue]="condValue + condition.value + ' AND '"
-        [workflow]="workflow"
-      ></app-condition-item>
-    </div>
   </div>
 </ng-template>
 <ng-template #tmplSortableRight let-condition="condition" let-condValue="condValue" let-col="col">
   <div *ngFor="let condOperation of condition.right; let condIndex = index">
     <div *ngIf="condOperation.left !== undefined && condOperation.value === ''">
       <ng-container *ngTemplateOutlet="tmplOperation, context:{condition: condOperation, condValue: condValue + 'NOT(' + condition.value + ')', condIndex: condIndex}"></ng-container>
-    </div>
-    <div *ngIf="condOperation.right !== undefined && condOperation.value !== ''">
-      <app-condition-item
-        [includedWorkflowSplit]="false"
-        [condition]="condOperation"
-        (workflowIncluded)="includeWorkflow($event)"
-        (operationEdited)="editOperation($event)"
-        [index]="condIndex"
-        [condValue]="condValue + 'NOT(' + condition.value + ')' + ' AND '"
-        [workflow]="workflow"
-      ></app-condition-item>
     </div>
   </div>
 </ng-template>

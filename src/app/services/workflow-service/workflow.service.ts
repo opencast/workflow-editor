@@ -46,7 +46,7 @@ export class WorkflowService {
   private static parse2Operation(jsXmlOperation): Operation {
     const newOperation: Operation = {
       id: jsXmlOperation?.attr?.id,
-      if: jsXmlOperation?.attr?.if,
+      if: (jsXmlOperation?.attr?.if !== undefined)? jsXmlOperation.attr.if : '',
       description: jsXmlOperation?.attr?.description,
       retryStrategy: jsXmlOperation?.attr['retry-strategy'],
       maxAttempts: jsXmlOperation?.attr['max-attempts'],
@@ -58,7 +58,9 @@ export class WorkflowService {
     const configurations = WorkflowService.getCollectionOfJsElements(jsXmlOperation?.configurations?.configuration);
     configurations.forEach((configuration) => {
       if (newOperation.configurations === undefined) { newOperation.configurations = []; }
-      newOperation.configurations.push(WorkflowService.parse2Configuration(configuration));
+      if(configuration !== undefined) {
+        newOperation.configurations.push(WorkflowService.parse2Configuration(configuration));
+      }
     });
 
     return newOperation;
@@ -201,61 +203,19 @@ export class WorkflowService {
   private createNewCondTree(parserResults, operation): Condition {
     let newOpCondition: Condition = { value: '', left: [], right: [] };
     if (parserResults.type !== 'NOT') {
-      if (parserResults.type === 'AND') {
-        const leftAnd = this.createNewCondTree(parserResults.dl, operation);
-        const rightAnd = this.createNewCondTree(parserResults.dr, operation);
-        if (parserResults.dl.type !== 'NOT') {
-          rightAnd.leftParent = leftAnd;
-          leftAnd.left.push(rightAnd);
-        } else {
-          rightAnd.rightParent = leftAnd;
-          leftAnd.right.push(rightAnd);
-        }
-        newOpCondition = leftAnd;
-      } else {
-        newOpCondition.value = parserResults.v;
-      }
+      newOpCondition.value = parserResults.v;
     } else {
-      // const notCond = this.createNewCondTree(parserResults.dn, operation);
       newOpCondition = {value: parserResults.dn.v, left: [], right: []};
-      // newOpCondition.right.push(notCond);
     }
     return newOpCondition;
   }
 
   private findPositionInCondTree(lastOpCondition: Condition, parserResults, operation): {pos: string, value: Condition} {
-    let newCondPos: {pos: string, value: Condition} = {pos: '', value: null};
+    const newCondPos: {pos: string, value: Condition} = {pos: '', value: null};
     if (parserResults.type !== 'NOT') {
-      if (parserResults.type === 'AND') {
-
-        lastOpCondition.left.forEach((leftLastCond) => {
-          const tempLeftLastCond: Condition = this.instanceOfCondition(leftLastCond);
-          if (tempLeftLastCond !== null) {
-
-            const leftAnd = this.findPositionInCondTree(tempLeftLastCond, parserResults.dl, operation);
-            const rightAnd = this.findPositionInCondTree(tempLeftLastCond, parserResults.dr, operation);
-            if (lastOpCondition.value === parserResults.v) {
-              newCondPos = leftAnd;
-            }
-          }
-        });
-
-        lastOpCondition.right.forEach((rightLastCond) => {
-          const tempRightLastCond: Condition = this.instanceOfCondition(rightLastCond);
-          if (tempRightLastCond !== null) {
-
-            const leftAnd = this.findPositionInCondTree(tempRightLastCond, parserResults.dl, operation);
-            const rightAnd = this.findPositionInCondTree(tempRightLastCond, parserResults.dr, operation);
-            if (lastOpCondition.value === parserResults.v) {
-              newCondPos = leftAnd;
-            }
-          }
-        });
-      } else {
-        if (lastOpCondition.value === parserResults.v) {
-          newCondPos.value = lastOpCondition;
-          newCondPos.pos = 'left';
-        }
+      if (lastOpCondition.value === parserResults.v) {
+        newCondPos.value = lastOpCondition;
+        newCondPos.pos = 'left';
       }
     } else {
       if (lastOpCondition.value === parserResults.dn.v) {

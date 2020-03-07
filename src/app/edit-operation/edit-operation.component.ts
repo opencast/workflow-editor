@@ -29,8 +29,6 @@ export class EditOperationComponent implements OnInit {
   }
 
   updateWorkflow() {
-    console.log('operation', this.operation);
-    console.log('workflow', this.workflow);
     if(this.operation.if === '') {
       this.operation.ifError = '';
     }

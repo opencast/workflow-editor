@@ -24,6 +24,7 @@ export class ConditionItemComponent implements OnInit {
   workflowIncluded = new EventEmitter();
   options: Options = {
     animation: 0,
+    draggable: '.draggable',
     group: {
       name: 'shared'
     },
@@ -45,7 +46,6 @@ export class ConditionItemComponent implements OnInit {
         }
       },
       onAdd: (event: SortableEvent) => {
-        console.log('add', event);
         if (event.from.className === 'default-operation-list' || event.from.className === 'new-default-operation') {
           if (event.to.className === 'cond-sortable-right ng-star-inserted') {
             const clonedCondition: Condition = _.cloneDeep(
@@ -58,6 +58,10 @@ export class ConditionItemComponent implements OnInit {
             this.workflowService.removeCondFromCondOps(event.newIndex, this.condition.left);
             clonedCondition.leftParent = this.condition;
             this.workflowService.addCondToCondOps(clonedCondition, event.newIndex, this.condition.left);
+          }
+        } else {
+          if (event.item.getElementsByClassName('container').length > 0) {
+            this.workflowService.updateWorkflow(this.workflow);
           }
         }
       },
@@ -72,7 +76,6 @@ export class ConditionItemComponent implements OnInit {
   }
 
   removeOperation(removedOpOnCond: Condition) {
-    console.log("hier", removedOpOnCond);
     if (removedOpOnCond.left.length === 0 && removedOpOnCond.right.length === 0) {
       this.workflowService.updateWorkflow(this.workflow);
     }
