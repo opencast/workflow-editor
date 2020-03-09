@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UploadWorkflowsDialogComponent } from './upload-workflows-dialog/upload-workflows-dialog.component';
 import {WorkflowService} from './services/workflow-service/workflow.service';
 import {DownloadWorkflowsDialogComponent} from './download-workflows-dialog/download-workflows-dialog.component';
 import {Workflow} from './models/workflow';
 import {SelectWorkflowsDialogComponent} from './select-workflows-dialog/select-workflows-dialog.component';
-
 
 @Component({
   selector: 'app-root',
@@ -19,6 +18,11 @@ export class AppComponent {
   constructor(private dialog: MatDialog,
               private workflowService: WorkflowService) {
     this.workflows = this.workflowService.workflows;
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    $event.returnValue = true;
   }
 
   openUploadDialog(): void {
