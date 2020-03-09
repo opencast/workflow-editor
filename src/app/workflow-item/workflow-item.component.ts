@@ -31,9 +31,11 @@ export class WorkflowItemComponent implements OnInit {
   constructor(private workflowService: WorkflowService) {
     this.options = {
       onAdd: (event: SortableEvent) => {
-        const clonedOperation: Condition = _.cloneDeep(this.workflowService.getOperation(event.newIndex, this.workflow));
-        this.workflowService.removeOperation(event.newIndex, this.workflow);
-        this.workflowService.addOperation(clonedOperation, event.newIndex, this.workflow);
+        if (event.from.className === 'default-operation-list' || event.from.className === 'new-default-operation') {
+          const clonedOperation: Condition = _.cloneDeep(this.workflowService.getDefaultOpById(event.item.dataset.defaultOperation));
+          this.workflowService.removeOperation(event.newIndex, this.workflow);
+          this.workflowService.addOperation(clonedOperation, event.newIndex, this.workflow);
+        }
       },
       setData: (dataTransfer) => {
         const img = new Image();

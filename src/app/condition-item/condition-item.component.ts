@@ -49,12 +49,12 @@ export class ConditionItemComponent implements OnInit {
         if (event.from.className === 'default-operation-list' || event.from.className === 'new-default-operation') {
           if (event.to.className === 'cond-sortable-right ng-star-inserted') {
             const clonedCondition: Condition = _.cloneDeep(
-              this.workflowService.getCondFromCondOps(event.newIndex, this.condition.right));
+              this.workflowService.getDefaultOpById(event.item.dataset.defaultOperation));
             this.workflowService.removeCondFromCondOps(event.newIndex, this.condition.right);
             clonedCondition.rightParent = this.condition;
             this.workflowService.addCondToCondOps(clonedCondition, event.newIndex, this.condition.right);
           } else if (event.target.className === 'cond-sortable-left ng-star-inserted') {
-            const clonedCondition: Condition = _.cloneDeep(this.workflowService.getCondFromCondOps(event.newIndex, this.condition.left));
+            const clonedCondition: Condition = _.cloneDeep(this.workflowService.getDefaultOpById(event.item.dataset.defaultOperation));
             this.workflowService.removeCondFromCondOps(event.newIndex, this.condition.left);
             clonedCondition.leftParent = this.condition;
             this.workflowService.addCondToCondOps(clonedCondition, event.newIndex, this.condition.left);

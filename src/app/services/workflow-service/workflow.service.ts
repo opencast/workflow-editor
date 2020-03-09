@@ -321,6 +321,10 @@ export class WorkflowService {
     return this.instanceOfCondition(condOps[index]);
   }
 
+  getDefaultOpById(id: string): Condition {
+    return this.defaultOperations.filter((defaultOperation: Condition) => (defaultOperation.left[0] as Operation).id === id)[0];
+  }
+
   removeCondFromCondOps(index: number, condOps: (Condition | Operation)[]) {
     condOps.splice(index, 1);
   }
