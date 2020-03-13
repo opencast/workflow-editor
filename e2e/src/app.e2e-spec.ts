@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('opencast-workflow-editor app is running!');
+    expect(page.getTitleText()).toEqual('close');
   });
 
   afterEach(async () => {
