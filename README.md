@@ -1,27 +1,26 @@
-# OpencastWorkflowEditor
+# Opencast Workflow Editor
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
+A visual workflow editor for [Opencast](https://opencast.org/).
 
-## Development server
+![Screenshot](docs/imgs/screenshot.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Usage
 
-## Code scaffolding
+### Self-hosted
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Opencast Workflow Editor runs entirely in the browser and has not backend component. Deploying the Opencast Workflow
+Editor is thus as simple as dropping it in your web server folder.
 
-## Build
+## Build Instructions
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+To build a distribution version, run the following commands:
 
-## Running unit tests
+```sh
+$ npm install
+$ npm run build # or buildProd for production builds
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+This will generate a deployable version in the `dist/opencast-workflow-editor` folder.
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+When developing you might want to run `npm start` instead to serve a compiled version and automatically recompile on
+file changes.
