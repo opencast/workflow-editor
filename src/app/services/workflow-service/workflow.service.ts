@@ -12,7 +12,7 @@ import * as FileSaver from 'file-saver';
 import * as _ from 'lodash';
 import {DefaultOperationParamList, defaultOperationParamList} from '../../models/default-operation-param-list';
 import { Parser, Rule, Grammar, CompiledRules, Lexer } from 'nearley';
-import grammar from './operation-condition-grammer-parser';
+import grammar from './operation-condition-grammar-parser';
 import {Condition} from '../../models/condition';
 
 @Injectable({
