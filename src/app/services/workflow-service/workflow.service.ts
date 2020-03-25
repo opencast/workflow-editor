@@ -31,10 +31,12 @@ export class WorkflowService {
 
   workflows: Workflow[] = [];
   defaultOperations: Condition[] = [];
+  newDefaultOperations: Condition[] = [];
 
   constructor() {
     this.initNewWorkflow();
     this.initDefaultOperations(defaultOperationParamList);
+    this.initNewDefaultOperations();
   }
 
   private static parse2Tag(jsXmlTag): Tag {
@@ -304,6 +306,22 @@ export class WorkflowService {
     });
   }
 
+  private initNewDefaultOperations() {
+    this.newDefaultOperations.push({
+        value: '',
+        left: [{
+          id: 'new-operation',
+          if: '',
+          selected: false
+        }],
+        right: []
+      });
+
+    this.newDefaultOperations = _.sortBy(
+      this.newDefaultOperations,
+      [(op) => (op.left[0] as Operation).id]);
+  }
+
   addWorkflow(workflow: Workflow) {
     this.updateConditionsOnOperations(workflow);
     this.workflows.push(workflow);
@@ -323,6 +341,10 @@ export class WorkflowService {
 
   getDefaultOpById(id: string): Condition {
     return this.defaultOperations.filter((defaultOperation: Condition) => (defaultOperation.left[0] as Operation).id === id)[0];
+  }
+
+  getNewDefaultOpById(id: string): Condition {
+    return this.newDefaultOperations.filter((newDefaultOperation: Condition) => (newDefaultOperation.left[0] as Operation).id === id)[0];
   }
 
   removeCondFromCondOps(index: number, condOps: (Condition | Operation)[]) {

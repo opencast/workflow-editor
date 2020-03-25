@@ -27,17 +27,7 @@ export class DefaultOperationListComponent implements OnInit {
 
   constructor(private workflowService: WorkflowService) {
     this.defaultOperations = this.workflowService.defaultOperations;
-
-    const newDefaultOperation: Condition = {
-      value: '',
-      left: [{
-        id: 'new-operation',
-        if: '',
-        selected: false
-      }],
-      right: []
-    };
-    this.newDefaultOperations = [newDefaultOperation];
+    this.newDefaultOperations = this.workflowService.newDefaultOperations;
   }
 
   ngOnInit() {
