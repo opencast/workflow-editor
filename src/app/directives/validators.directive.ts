@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 import {AbstractControl, NG_VALIDATORS} from '@angular/forms';
 import { Parser, Rule, Grammar, CompiledRules, Lexer } from 'nearley';
-import grammar from '../services/workflow-service/operation-condition-grammer-parser';
+import grammar from '../services/workflow-service/operation-condition-grammar-parser';
 
 @Directive({
   selector: '[appOpIfConditionValidator]',

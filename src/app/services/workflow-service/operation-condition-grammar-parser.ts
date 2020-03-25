@@ -192,13 +192,13 @@ const grammar: Grammar = {
           }
         }
     },
-    {"name": "RELLITERAL$string$1", "symbols": [{"literal":"&"}, {"literal":"g"}, {"literal":"t"}, {"literal":";"}, {"literal":"="}], "postprocess": (d) => d.join('')},
+    {"name": "RELLITERAL$string$1", "symbols": [{"literal":">"}, {"literal":"="}], "postprocess": (d) => d.join('')},
     {"name": "RELLITERAL", "symbols": ["RELLITERAL$string$1"], "postprocess": (d) => {return {type:'RELLITERAL', d:d, v:d[0]}}},
-    {"name": "RELLITERAL$string$2", "symbols": [{"literal":"&"}, {"literal":"g"}, {"literal":"t"}, {"literal":";"}], "postprocess": (d) => d.join('')},
+    {"name": "RELLITERAL$string$2", "symbols": [{"literal":">"}], "postprocess": (d) => d.join('')},
     {"name": "RELLITERAL", "symbols": ["RELLITERAL$string$2"], "postprocess": (d) => {return {type:'RELLITERAL', d:d, v:d[0]}}},
-    {"name": "RELLITERAL$string$3", "symbols": [{"literal":"&"}, {"literal":"l"}, {"literal":"t"}, {"literal":";"}, {"literal":"="}], "postprocess": (d) => d.join('')},
+    {"name": "RELLITERAL$string$3", "symbols": [{"literal":"<"}, {"literal":"="}], "postprocess": (d) => d.join('')},
     {"name": "RELLITERAL", "symbols": ["RELLITERAL$string$3"], "postprocess": (d) => {return {type:'RELLITERAL', d:d, v:d[0]}}},
-    {"name": "RELLITERAL$string$4", "symbols": [{"literal":"&"}, {"literal":"l"}, {"literal":"t"}, {"literal":";"}], "postprocess": (d) => d.join('')},
+    {"name": "RELLITERAL$string$4", "symbols": [{"literal":"<"}], "postprocess": (d) => d.join('')},
     {"name": "RELLITERAL", "symbols": ["RELLITERAL$string$4"], "postprocess": (d) => {return {type:'RELLITERAL', d:d, v:d[0]}}},
     {"name": "RELLITERAL$string$5", "symbols": [{"literal":"="}, {"literal":"="}], "postprocess": (d) => d.join('')},
     {"name": "RELLITERAL", "symbols": ["RELLITERAL$string$5"], "postprocess": (d) => {return {type:'RELLITERAL', d:d, v:d[0]}}},
@@ -236,11 +236,11 @@ const grammar: Grammar = {
     {"name": "NUMBER$ebnf$3", "symbols": ["NUMBER$ebnf$3", /[0-9]/], "postprocess": (d) => d[0].concat([d[1]])},
     {"name": "NUMBER", "symbols": ["NUMBER$ebnf$2", {"literal":"."}, "NUMBER$ebnf$3"], "postprocess":
         (d) => {return {type:'NUMBER', d:d, v: d[0].join("") + d[1] + d[2].join("")}} },
-    {"name": "STRING$string$1", "symbols": [{"literal":"&"}, {"literal":"a"}, {"literal":"p"}, {"literal":"o"}, {"literal":"s"}, {"literal":";"}], "postprocess": (d) => d.join('')},
+    {"name": "STRING$string$1", "symbols": [{"literal":"'"}], "postprocess": (d) => d.join('')},
     {"name": "STRING$ebnf$1", "symbols": []},
     {"name": "STRING$ebnf$1$subexpression$1", "symbols": [/[a-zA-Z0-9!#%\-\+\*()_,.;:\\\[\]@ ]/]},
     {"name": "STRING$ebnf$1", "symbols": ["STRING$ebnf$1", "STRING$ebnf$1$subexpression$1"], "postprocess": (d) => d[0].concat([d[1]])},
-    {"name": "STRING$string$2", "symbols": [{"literal":"&"}, {"literal":"a"}, {"literal":"p"}, {"literal":"o"}, {"literal":"s"}, {"literal":";"}], "postprocess": (d) => d.join('')},
+    {"name": "STRING$string$2", "symbols": [{"literal":"'"}], "postprocess": (d) => d.join('')},
     {"name": "STRING", "symbols": ["STRING$string$1", "STRING$ebnf$1", "STRING$string$2"], "postprocess":
         (d) => {
           return {
