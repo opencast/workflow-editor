@@ -30,7 +30,7 @@
     "angular-split": "^3.0.2",
     "fast-xml-parser": "^3.16.0",
     "file-saver": "^2.0.2",
-    "jszip": "^3.2.2",
+    "jszip": "^3.8.0",
     "lodash": "^4.17.15",
     "nearley": "^2.19.1",
     "ng2-search-filter": "^0.5.1",
