@@ -28,7 +28,7 @@
     "@schematics/angular": "^8.3.23",
     "@types/jszip": "^3.1.7",
     "angular-split": "^3.0.2",
-    "fast-xml-parser": "^3.16.0",
+    "fast-xml-parser": "^4.2.4",
     "file-saver": "^2.0.2",
     "jszip": "^3.2.2",
     "lodash": "^4.17.15",
